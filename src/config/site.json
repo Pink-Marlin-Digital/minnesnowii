@@ -1,0 +1,64 @@
+{
+  "siteName": "Pink Marlin Digital",
+  "title": "Pink Marlin Digital - Starter Site",
+  "description": "This is the starter site for Pink Marlin Digital and TryMarlin.ai",
+  "baseUrl": "https://example.com",
+  "brand": {
+    "name": "Pink Marlin Digital",
+    "slogan": "Building modern, performant websites",
+    "logo": {
+      "light": "/logo-light.svg",
+      "dark": "/logo-dark.svg",
+      "favicon": "/favicon.svg"
+    }
+  },
+  "business": {
+    "name": "Pink Marlin Digital",
+    "address": {
+      "street": "123 Main Street",
+      "city": "City",
+      "state": "State",
+      "zip": "12345",
+      "country": "USA"
+    },
+    "phone": "+1 (555) 123-4567",
+    "email": "info@pinkmarlindigital.com",
+    "hours": {
+      "monday": "9:00 AM - 5:00 PM",
+      "tuesday": "9:00 AM - 5:00 PM",
+      "wednesday": "9:00 AM - 5:00 PM",
+      "thursday": "9:00 AM - 5:00 PM",
+      "friday": "9:00 AM - 5:00 PM",
+      "saturday": "Closed",
+      "sunday": "Closed"
+    }
+  },
+  "social": [
+    {
+      "platform": "facebook",
+      "url": "https://facebook.com/pinkmarlindigital",
+      "icon": "facebook"
+    },
+    {
+      "platform": "twitter",
+      "url": "https://twitter.com/pinkmarlindigital",
+      "icon": "twitter"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/company/pinkmarlindigital",
+      "icon": "linkedin"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://instagram.com/pinkmarlindigital",
+      "icon": "instagram"
+    }
+  ],
+  "seo": {
+    "defaultTitle": "Pink Marlin Digital",
+    "defaultDescription": "This is the starter site for Pink Marlin Digital and TryMarlin.ai",
+    "defaultImage": "/og-image.jpg",
+    "twitterHandle": "@pinkmarlindigital"
+  }
+}
