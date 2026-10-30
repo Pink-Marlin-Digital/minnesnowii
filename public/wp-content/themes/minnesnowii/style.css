@@ -1,0 +1,213 @@
+/*
+Theme Name: Minnesnowii Shave Ice
+Description: Child theme for Flat Bootstrap. Primary them for Ready 2 Fruit
+Author: Stargazer LLC
+Author url: https://stargazerllc.com
+Version: 1.5
+License: GNU General Public License
+License URI: http://www.opensource.org/licenses/GPL-3.0
+Template: flat-bootstrap
+Template Version: 1.9
+*/
+
+
+@import url("/assets/vendor/google-fonts/fa6865987391.css");
+
+body {
+	background-color: #ffffff;
+	font-family: 'Open Sans', sans-serif;
+	color:#000;
+}
+button, html input[type="button"], input[type="submit"] {
+	background-color: #03d9ff;
+	color: #fff;
+	border-radius: 0px;
+	border: none;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Open Sans', sans-serif;
+}
+a, a:hover, a:visited, a:active, a:focus {
+	color: inherit;
+}
+#page, .after-footer, .container, .navbar {
+	max-width: 100%;
+}
+.container {
+	width: 100%;
+	/*padding-left:0px;
+	padding-right:0px;*/
+}
+.vc_row {
+    margin: 0px!important; 
+}
+header.content-header, div#sidebar-pagebottom, header.content-header-image{
+	display: none!important;
+}
+.site-header {
+	background: #000;
+}
+.home .site-header {
+	position: absolute;
+	width: 100%;
+	padding: 0 5%;
+	background: none;
+}
+.site-header {
+	position: initial;
+}
+.top-bar-right {
+	text-align: right;
+}
+.top-bar {
+	padding-top: 10px;
+	color: #fff;
+	font-size: 12px;
+	z-index: 9999;
+}
+.top-bar i {
+	font-size: 18px;
+	padding-right: 4px;
+}
+.navbar-brand {
+    position: absolute!important;
+    top: 20px;
+    left: 15px;
+}
+.navbar-brand img {
+    width: 125px;
+}
+.navbar-default {
+    background:none;
+    border: none;
+    padding-bottom: 15px;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background: none;
+}
+.navbar-default .navbar-toggle {
+    border: 1px solid transparent;
+}
+ul.nav.navbar-nav {
+	background: none;
+}
+.navbar-default .navbar-nav>li>a {
+	color:#fff;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+}
+.navbar-nav {
+    float: none;
+    margin: 0;
+}
+.navbar-nav>li {
+	float: right;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+	background:none;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
+	color:#fff;
+}
+.navbar-toggle {
+	margin-top: 30px;
+}
+.menu-item a:hover{
+	color: #03d9ff !important;
+}
+.blue-hr hr {
+	width: 50px;
+	border: 2px solid #03d9ff;
+	margin: 0 auto;
+}
+.white-text {
+	color: #fff;
+	background: rgba(0, 0, 0, .4);
+}
+.no-padding .vc_column-inner {
+	padding: 0!important;
+}
+.photo-grid .wpb_content_element {
+	margin-bottom: 0;
+}
+.mobile-friendly {
+	padding-left: 5%;
+	padding-right: 5%;
+}
+.footer-top {
+	padding: 30px 5%;
+	background-color: #000000;
+}
+.footer-top a, .footer-top a:visited, .footer-top a:active {
+	color: #03d9ff;
+}
+.footer-left {
+	text-align: center;
+}
+.footer-left img {
+	display: inline-block;
+	width: 200px;
+}
+.footer-left i {
+	color: #03d9ff;
+	font-size: 30px;
+	padding-right: 10px;
+}
+.footer-right label.gfield_label {
+	display: none!important;
+}
+input#input_1_1, input#input_1_2, textarea#input_1_3 {
+	border: 1px solid #03d9ff;
+	border-radius: 0;
+}
+.footer-bottom {
+	padding: 10px 20px;
+	background-color: #343434;
+	color: #fff;
+	font-size: 12px;
+}
+.footer-bottom p {
+	margin: 0;
+}
+div#sidebar-pagetop {
+	display: none;
+}
+
+.footer-icons a i {
+    color: #fff !important;
+    margin-top: 1rem;
+}
+
+#book-container {
+	font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+	.masthead {
+		padding-bottom: 15%; 
+	}
+	.navbar-toggle {
+		display: none;
+	}
+	.navbar-brand>img {
+		margin-top: 10%;
+	}
+/* changes 3-8-23 
+ * .navbar-nav>li {
+		float: none;
+	}
+	.collapse.in {
+		background: #000;
+		margin-top: 10px;
+		border: none;
+	}
+	.mobile-friendly {
+	padding-left: 0;
+	padding-right: 0;
+} */
+}
+
+
+
+

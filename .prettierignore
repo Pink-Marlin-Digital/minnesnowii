@@ -4,4 +4,7 @@ dist/
 pnpm-lock.yaml
 package-lock.json
 *.md
+public/
+src/data/
+tests/reference/
 

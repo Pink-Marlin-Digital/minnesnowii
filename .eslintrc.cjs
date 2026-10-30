@@ -90,7 +90,8 @@ module.exports = {
       // Configuration for TypeScript files
       files: ['*.ts', '*.tsx'],
       rules: {
-        // TypeScript-specific rules can go here
+        '@typescript-eslint/lines-between-class-members': 'off',
+        '@typescript-eslint/no-throw-literal': 'off',
       },
     },
   ],

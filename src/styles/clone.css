@@ -1,0 +1,41 @@
+/* Keep reveal animations in their finished, visible state without running WordPress animation scripts. */
+.wpb_animate_when_almost_visible,
+.wpb_animate_when_almost_visible.wpb_start_animation,
+.animated {
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+}
+
+.netlify-honeypot {
+  display: none !important;
+}
+
+/* Cloudflare Turnstile is rendered by a third-party script. Reserve the same space the live widget occupies. */
+.gf-turnstile-container {
+  min-height: 94px;
+}
+
+/* WordPress bakes full-bleed rows to the desktop viewport. Let them follow the screen below that width. */
+@media (max-width: 1200px) {
+  .vc_row[data-vc-full-width='true'] {
+    width: 100% !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Nivo Slider sizes slides with JavaScript. Keep the current slide inside the phone viewport. */
+@media (max-width: 767px) {
+  .nivoSlider {
+    overflow: hidden;
+    height: auto !important;
+  }
+
+  .nivoSlider img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    left: 0 !important;
+  }
+}

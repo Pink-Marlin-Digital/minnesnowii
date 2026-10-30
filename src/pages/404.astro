@@ -1,0 +1,11 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { notFoundPage } from '../lib/pages';
+
+const page = notFoundPage();
+if (!page) {
+  throw new Error('Manifest is missing the 404 page.');
+}
+---
+
+<SiteLayout page={page} />

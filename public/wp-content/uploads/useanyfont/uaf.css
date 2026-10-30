@@ -1,0 +1,10 @@
+				@font-face {
+					font-family: 'alphakind';
+					src: url("/wp-content/uploads/useanyfont/2609Alphakind.woff2") format('woff2'),
+						url("/wp-content/uploads/useanyfont/2609Alphakind.woff") format('woff');
+					   font-display: auto;
+				}
+
+				.alphakind{font-family: 'alphakind' !important;}
+
+		

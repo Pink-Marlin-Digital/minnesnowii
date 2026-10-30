@@ -1,64 +1,59 @@
 {
-  "siteName": "Pink Marlin Digital",
-  "title": "Pink Marlin Digital - Starter Site",
-  "description": "This is the starter site for Pink Marlin Digital and TryMarlin.ai",
-  "baseUrl": "https://example.com",
+  "siteName": "Minnesnowii Shave Ice",
+  "title": "Minnesnowii Hawaiian Style Shave Ice - Minnesotas Best Shave ice - Minnesnowii Shave Ice",
+  "description": "Minnesnowii is authentic Hawaiian style Shave Ice in Minnesota. Experience the finest flavors and texture that only our shave ice can offer!",
+  "baseUrl": "https://minnesnowii.com",
   "brand": {
-    "name": "Pink Marlin Digital",
-    "slogan": "Building modern, performant websites",
+    "name": "Minnesnowii",
+    "slogan": "Minnesota's Premier Shave Ice Company",
     "logo": {
-      "light": "/logo-light.svg",
-      "dark": "/logo-dark.svg",
-      "favicon": "/favicon.svg"
+      "light": "/wp-content/uploads/2018/07/Minnesnowii-logo.png",
+      "dark": "/wp-content/uploads/2018/07/Minnesnowii-logo.png",
+      "favicon": "/favicon.ico"
     }
   },
   "business": {
-    "name": "Pink Marlin Digital",
+    "name": "Minnesnowii",
     "address": {
-      "street": "123 Main Street",
-      "city": "City",
-      "state": "State",
-      "zip": "12345",
+      "street": "6100 Mccoll Dr Unit 381",
+      "city": "Savage",
+      "state": "MN",
+      "zip": "",
       "country": "USA"
     },
-    "phone": "+1 (555) 123-4567",
-    "email": "info@pinkmarlindigital.com",
+    "phone": "(952) 486-0079",
+    "email": "",
     "hours": {
-      "monday": "9:00 AM - 5:00 PM",
-      "tuesday": "9:00 AM - 5:00 PM",
-      "wednesday": "9:00 AM - 5:00 PM",
-      "thursday": "9:00 AM - 5:00 PM",
-      "friday": "9:00 AM - 5:00 PM",
-      "saturday": "Closed",
-      "sunday": "Closed"
+      "monday": "",
+      "tuesday": "",
+      "wednesday": "",
+      "thursday": "",
+      "friday": "",
+      "saturday": "",
+      "sunday": ""
     }
   },
   "social": [
     {
       "platform": "facebook",
-      "url": "https://facebook.com/pinkmarlindigital",
+      "url": "https://www.facebook.com/MinneSnowii/",
       "icon": "facebook"
     },
     {
       "platform": "twitter",
-      "url": "https://twitter.com/pinkmarlindigital",
+      "url": "https://twitter.com/Minnesnowii",
       "icon": "twitter"
     },
     {
-      "platform": "linkedin",
-      "url": "https://linkedin.com/company/pinkmarlindigital",
-      "icon": "linkedin"
-    },
-    {
       "platform": "instagram",
-      "url": "https://instagram.com/pinkmarlindigital",
+      "url": "https://www.instagram.com/minnesnowii/",
       "icon": "instagram"
     }
   ],
   "seo": {
-    "defaultTitle": "Pink Marlin Digital",
-    "defaultDescription": "This is the starter site for Pink Marlin Digital and TryMarlin.ai",
-    "defaultImage": "/og-image.jpg",
-    "twitterHandle": "@pinkmarlindigital"
+    "defaultTitle": "Minnesnowii Hawaiian Style Shave Ice",
+    "defaultDescription": "Minnesnowii is authentic Hawaiian style Shave Ice in Minnesota. Experience the finest flavors and texture that only our shave ice can offer!",
+    "defaultImage": "/wp-content/uploads/2021/07/Artboard-1@2x.png",
+    "twitterHandle": "@Minnesnowii"
   }
 }

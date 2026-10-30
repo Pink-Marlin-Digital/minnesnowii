@@ -1,0 +1,9 @@
+{
+  "failures": [
+    {
+      "url": "https://minnesnowii.com/wp-content/plugins/mega-addons-for-visual-composer/images/bg_header.jpg",
+      "error": "Error: 404 https://minnesnowii.com/wp-content/plugins/mega-addons-for-visual-composer/images/bg_header.jpg"
+    }
+  ],
+  "pages": 120
+}

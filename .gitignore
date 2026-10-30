@@ -28,3 +28,9 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# generated CSS bundles and test output
+public/assets/css/bundles/
+test-results/
+playwright-report/
+blob-report/

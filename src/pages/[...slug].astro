@@ -1,0 +1,22 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { routablePages } from '../lib/pages';
+import type { PageData } from '../lib/pages';
+
+export function getStaticPaths() {
+  return routablePages()
+    .filter((page) => page.path !== '/')
+    .map((page) => ({
+      params: { slug: page.path.replace(/^\/|\/$/g, '') },
+      props: { page },
+    }));
+}
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+---
+
+<SiteLayout page={page} />

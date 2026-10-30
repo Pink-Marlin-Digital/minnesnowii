@@ -1,0 +1,37 @@
+---
+import Seo from '../components/Seo.astro';
+import { bundleHref, readPageHtml } from '../lib/pages';
+import type { PageData } from '../lib/pages';
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+const html = readPageHtml(page);
+const bundle = bundleHref(page.stylesheets);
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <Seo page={page} />
+    <link rel="stylesheet" href={bundle} />
+    <link rel="stylesheet" href={`/assets/css/inline/${page.id}.css`} />
+    <link rel="stylesheet" href="/assets/css/clone.css" />
+    {page.lcpImage && <link rel="preload" as="image" href={page.lcpImage} fetchpriority="high" />}
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.navbar-toggle').forEach((button) => {
+          button.addEventListener('click', () => {
+            const menu = document.querySelector('.navbar-collapse');
+            if (!menu) return;
+            const open = menu.classList.toggle('in');
+            button.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+        });
+      });
+    </script>
+  </head>
+  <body class={page.bodyClass} set:html={html} />
+</html>
