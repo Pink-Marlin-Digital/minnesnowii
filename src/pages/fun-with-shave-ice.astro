@@ -1,6 +1,7 @@
 ---
 import PageHero from '../components/molecules/PageHero/PageHero.astro';
 import SectionHeader from '../components/molecules/SectionHeader/SectionHeader.astro';
+import InstagramFollowCta from '../components/molecules/InstagramFollowCta/InstagramFollowCta.astro';
 import Text from '../components/atoms/Text/Text.astro';
 import PhotoGallery from '../components/organisms/PhotoGallery/PhotoGallery.astro';
 import FairCountdown from '../components/FairCountdown.astro';
@@ -23,6 +24,11 @@ const page = createPageSeo({
     <SectionHeader title={content.headline} display align="center" />
     {content.body.map((paragraph) => <Text class="muted" align="center">{paragraph}</Text>)}
     <PhotoGallery />
+    <InstagramFollowCta
+      title={content.instagramFollow.title}
+      body={content.instagramFollow.body}
+      buttonLabel={content.instagramFollow.buttonLabel}
+    />
     <FairCountdown />
   </div>
 </SiteLayout>

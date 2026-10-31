@@ -8,5 +8,10 @@
   "body": [
     "Minnesnowii Authentic Hawaiian Shave Ice is serving fun, all year long! But the most important ingredient is the only one that we cannot buy: IT'S YOU!",
     "Have a picture to share? Hit us up on social media and show us the fun that Hawaiian shave ice creates!"
-  ]
+  ],
+  "instagramFollow": {
+    "title": "Follow us on Instagram",
+    "body": "Want more smiles, flavors, and where to find us next? Follow @minnesnowii for the latest updates and plenty of shave ice fun.",
+    "buttonLabel": "Follow @minnesnowii"
+  }
 }

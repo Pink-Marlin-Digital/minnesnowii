@@ -30,8 +30,9 @@ export interface PageSeo {
 }
 
 const DEFAULT_ICONS: PageIcon[] = [
-  { rel: 'icon', href: '/wp-content/uploads/2022/01/cropped-shaved-ice-32x32.png', sizes: '32x32' },
-  { rel: 'icon', href: '/wp-content/uploads/2022/01/cropped-shaved-ice-192x192.png', sizes: '192x192' },
+  { rel: 'icon', href: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
+  { rel: 'icon', href: '/wp-content/uploads/2022/01/cropped-shaved-ice-32x32.png', sizes: '32x32', type: 'image/png' },
+  { rel: 'icon', href: '/wp-content/uploads/2022/01/cropped-shaved-ice-192x192.png', sizes: '192x192', type: 'image/png' },
   { rel: 'apple-touch-icon', href: '/wp-content/uploads/2022/01/cropped-shaved-ice-180x180.png' },
 ];
 

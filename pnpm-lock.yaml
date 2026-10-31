@@ -41,6 +41,9 @@ importers:
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.2.2)(react@19.2.0)
+      react-photo-album:
+        specifier: ^3.6.2
+        version: 3.6.2(@types/react@19.2.2)(react@19.2.0)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2641,6 +2644,16 @@ packages:
     peerDependencies:
       '@types/react': '>=18'
       react: '>=18'
+
+  react-photo-album@3.6.2:
+    resolution: {integrity: sha512-ZEOzeCH5d2DuSrhRbDcueZop9k7FVaEwxcxX7k6B1oN1kMK2g9aRppBJoJKMISMbebwzqlE25RaM3vX0qcJOQA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/react': ^18 || ^19
+      react: ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
@@ -6284,6 +6297,12 @@ snapshots:
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
+
+  react-photo-album@3.6.2(@types/react@19.2.2)(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+    optionalDependencies:
+      '@types/react': 19.2.2
 
   react-refresh@0.17.0: {}
 

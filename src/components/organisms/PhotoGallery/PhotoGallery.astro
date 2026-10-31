@@ -1,73 +1,46 @@
 ---
+import ServerPhotoAlbum from 'react-photo-album/server';
+import 'react-photo-album/masonry.css';
+import type { GalleryPhoto } from '../../../data/instagram-posts';
 import { instagramPosts } from '../../../data/instagram-posts';
 
 interface Props {
-  images?: { src: string; alt: string }[];
+  images?: GalleryPhoto[];
 }
 
 const { images = instagramPosts } = Astro.props;
 
-function tileSize(src: string, index: number): string {
-  let hash = index + 1;
-  for (let i = 0; i < src.length; i += 1) {
-    hash = (hash * 33 + src.charCodeAt(i)) % 1000;
-  }
-  const roll = hash % 10;
-  if (roll < 2) return 'feature';
-  if (roll < 5) return 'tall';
-  if (roll < 7) return 'wide';
-  return 'regular';
+function columns(containerWidth: number): number {
+  if (containerWidth < 700) return 2;
+  if (containerWidth < 1100) return 3;
+  return 4;
+}
+
+function spacing(containerWidth: number): number {
+  return containerWidth < 700 ? 12 : 16;
 }
 ---
 
-<ul class="photo-gallery" aria-label="Photo gallery">
-  {images.map((image, index) => (
-    <li class:list={['photo-tile', `is-${tileSize(image.src, index)}`]}>
-      <img src={image.src} alt={image.alt} loading="lazy" width="600" height="600" />
-    </li>
-  ))}
-</ul>
+<div class="photo-gallery" role="region" aria-label="Photo gallery">
+  <ServerPhotoAlbum
+    layout="masonry"
+    photos={images}
+    breakpoints={[360, 700, 1100]}
+    columns={columns}
+    spacing={spacing}
+    componentsProps={{
+      image: { loading: 'lazy', decoding: 'async' },
+    }}
+  />
+</div>
 
 <style>
   .photo-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    width: 100%;
   }
 
-  .photo-tile {
-    overflow: hidden;
+  .photo-gallery :global(.react-photo-album--image) {
     border-radius: 16px;
     background: #f3f3f3;
-  }
-
-  .photo-tile img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .is-tall {
-    grid-row: span 2;
-  }
-
-  .is-wide {
-    grid-column: span 2;
-  }
-
-  .is-feature {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  @media (min-width: 900px) {
-    .photo-gallery {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
   }
 </style>

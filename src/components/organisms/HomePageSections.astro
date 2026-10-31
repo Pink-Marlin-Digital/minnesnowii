@@ -133,19 +133,21 @@ const previewPosts = home.blogPreview.slugs
   </ul>
 </section>
 
-<section class="home-about page-wrap" aria-labelledby="home-about-title">
-  <div class="home-about-quote">
-    <img src={home.about.image.src} alt={home.about.image.alt} width="208" height="300" loading="lazy" />
-    <blockquote>
-      <p>“{home.about.quote}”</p>
-      <footer>{home.about.quoteAttribution}</footer>
-    </blockquote>
-  </div>
-  <div class="home-about-copy">
-    <h2 id="home-about-title" class="section-display">{home.about.title}</h2>
-    {home.about.body.map((paragraph) => (
-      <p>{paragraph}</p>
-    ))}
+<section class="home-about" aria-labelledby="home-about-title">
+  <div class="home-about-inner page-wrap">
+    <div class="home-about-quote">
+      <img src={home.about.image.src} alt={home.about.image.alt} width="208" height="300" loading="lazy" />
+      <blockquote>
+        <p>“{home.about.quote}”</p>
+        <footer>{home.about.quoteAttribution}</footer>
+      </blockquote>
+    </div>
+    <div class="home-about-copy">
+      <h2 id="home-about-title" class="section-display">{home.about.title}</h2>
+      {home.about.body.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
   </div>
 </section>
 
@@ -330,7 +332,13 @@ const previewPosts = home.blogPreview.slugs
     display: grid;
     gap: 14px;
     padding: 36px 24px 48px;
-    background: linear-gradient(130deg, rgba(244, 231, 129, 1) 0%, rgba(244, 231, 129, 1) 20%, rgba(255, 255, 255, 1) 75%);
+    background: linear-gradient(
+      130deg,
+      rgb(244, 231, 129) 0%,
+      rgb(244, 231, 129) 20%,
+      rgb(255, 255, 255) 75%,
+      rgb(255, 255, 255) 100%
+    );
   }
 
   .home-finding-lead,
@@ -398,9 +406,19 @@ const previewPosts = home.blogPreview.slugs
   }
 
   .home-about {
+    background: linear-gradient(
+      130deg,
+      rgb(244, 231, 129) 0%,
+      rgb(244, 231, 129) 20%,
+      rgb(255, 255, 255) 75%,
+      rgb(255, 255, 255) 100%
+    );
+  }
+
+  .home-about-inner {
     display: grid;
     gap: 28px;
-    padding: 24px 0 64px;
+    padding: 40px 0 64px;
   }
 
   .home-about-quote {
@@ -460,7 +478,7 @@ const previewPosts = home.blogPreview.slugs
       justify-content: center;
     }
 
-    .home-about {
+    .home-about-inner {
       grid-template-columns: 0.8fr 1.2fr;
       align-items: start;
     }
