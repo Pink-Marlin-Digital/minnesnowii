@@ -1,0 +1,39 @@
+---
+import Button from '../../atoms/Button/Button.astro';
+
+interface Props {
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const { primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
+---
+
+<div class="cta-group">
+  <Button href={primaryHref}>{primaryLabel}</Button>
+  {secondaryHref && secondaryLabel && (
+    <a class="cta-secondary" href={secondaryHref}>{secondaryLabel}</a>
+  )}
+</div>
+
+<style>
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: center;
+  }
+
+  .cta-secondary {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cta-secondary:hover,
+  .cta-secondary:focus-visible {
+    color: var(--color-brand-red);
+  }
+</style>

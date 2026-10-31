@@ -1,0 +1,126 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  excerpt: string;
+  dateLabel: string;
+  image: string;
+  imageAlt: string;
+}
+
+const { href, title, excerpt, dateLabel, image, imageAlt } = Astro.props;
+---
+
+<a class="post-card" href={href}>
+  <span class="post-card-ring">
+    <img src={image} alt={imageAlt} width="280" height="280" loading="lazy" />
+  </span>
+  <span class="post-card-copy">
+    <span class="post-card-date">{dateLabel}</span>
+    <span class="post-card-title">{title}</span>
+    <span class="post-card-excerpt">{excerpt}</span>
+    <span class="post-card-more">Read more -&gt;</span>
+  </span>
+</a>
+
+<style>
+  .post-card {
+    display: flex;
+    align-items: stretch;
+    gap: 18px;
+    box-sizing: border-box;
+    height: 100%;
+    min-width: 0;
+    padding: 16px;
+    border-radius: 28px;
+    background: var(--color-brand-ice);
+    color: var(--color-brand-ink);
+    text-decoration: none;
+  }
+
+  .post-card-ring {
+    display: block;
+    flex: 0 0 auto;
+    width: 132px;
+    height: 132px;
+    padding: 6px;
+    border-radius: 50%;
+    background: var(--color-brand-cyan);
+  }
+
+  .post-card-ring img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .post-card-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .post-card-date {
+    color: var(--color-brand-muted);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .post-card-title {
+    margin-top: 4px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .post-card-excerpt {
+    display: -webkit-box;
+    margin-top: 8px;
+    overflow: hidden;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .post-card-more {
+    align-self: flex-end;
+    margin-top: auto;
+    padding-top: 14px;
+    color: var(--color-brand-muted);
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .post-card:hover .post-card-ring,
+  .post-card:focus-visible .post-card-ring {
+    background: var(--color-brand-red);
+  }
+
+  .post-card:hover .post-card-more,
+  .post-card:focus-visible .post-card-more {
+    color: var(--color-brand-red);
+  }
+
+  .post-card:focus-visible {
+    outline: 3px solid var(--color-brand-red);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 699px) {
+    .post-card {
+      flex-direction: column;
+    }
+
+    .post-card-ring {
+      margin: 0 auto;
+    }
+  }
+</style>

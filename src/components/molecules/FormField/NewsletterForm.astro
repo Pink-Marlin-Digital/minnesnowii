@@ -1,0 +1,57 @@
+---
+import Button from '../../atoms/Button/Button.astro';
+import Input from '../../atoms/Input/Input.astro';
+
+interface Props {
+  formName?: string;
+}
+
+const { formName = 'minnesnowii-newsletter' } = Astro.props;
+---
+
+<form
+  class="newsletter-form"
+  name={formName}
+  method="POST"
+  action="/thank-you/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value={formName} />
+  <input type="hidden" name="subject" value="Newsletter signup" />
+  <input class="netlify-honeypot" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <Input id="newsletter-email" name="email" type="email" label="Email" required autocomplete="email" />
+  <label class="consent" for="newsletter-consent">
+    <input id="newsletter-consent" name="consent" type="checkbox" required />
+    <span>By checking this box I agree to joining the Minnesnowii mailing list</span>
+  </label>
+  <Button type="submit">Sign Up</Button>
+</form>
+
+<style>
+  .newsletter-form {
+    display: grid;
+    gap: 16px;
+    max-width: 480px;
+  }
+
+  .consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .consent input {
+    margin-top: 3px;
+  }
+
+  .netlify-honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>

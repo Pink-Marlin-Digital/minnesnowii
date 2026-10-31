@@ -1,0 +1,16 @@
+---
+import BlogIndex from '../../components/organisms/BlogIndex.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { createPageSeo } from '../../lib/seo';
+
+const page = createPageSeo({
+  id: 'blog',
+  path: '/blog/',
+  title: 'Blog - Minnesnowii Shave Ice',
+  description: 'News, features, and fair-season stories from Minnesnowii Shave Ice.',
+});
+---
+
+<SiteLayout page={page}>
+  <BlogIndex />
+</SiteLayout>

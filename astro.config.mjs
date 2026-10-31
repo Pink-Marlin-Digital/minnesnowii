@@ -16,5 +16,10 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => !/\/hero-[123]\/?$/.test(page),
+    }),
+  ],
 });

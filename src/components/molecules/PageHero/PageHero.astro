@@ -1,0 +1,85 @@
+---
+import Heading from '../../atoms/Heading/Heading.astro';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, eyebrow, image, imageAlt = '' } = Astro.props;
+---
+
+{image ? (
+  <header class="page-hero page-hero-image">
+    <img class="page-hero-photo" src={image} alt={imageAlt} width="1600" height="700" />
+    <div class="page-hero-overlay">
+      {eyebrow && <p class="page-hero-eyebrow">{eyebrow}</p>}
+      <Heading level={1}>{title}</Heading>
+    </div>
+  </header>
+) : (
+  <header class="page-hero page-hero-plain">
+    <div class="page-wrap">
+      {eyebrow && <p class="page-hero-eyebrow">{eyebrow}</p>}
+      <Heading level={1}>{title}</Heading>
+    </div>
+  </header>
+)}
+
+<style>
+  .page-hero-plain {
+    padding: 36px 0 8px;
+    background: linear-gradient(180deg, #05d9ff 0%, #ffffff 100%);
+  }
+
+  .page-hero-image {
+    position: relative;
+    display: grid;
+    align-items: end;
+    min-height: 280px;
+    overflow: hidden;
+    color: #ffffff;
+  }
+
+  .page-hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .page-hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.72));
+  }
+
+  .page-hero-overlay {
+    position: relative;
+    z-index: 1;
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 48px 0;
+  }
+
+  .page-hero-image :global(.heading) {
+    color: #ffffff;
+  }
+
+  .page-hero-eyebrow {
+    margin: 0 0 10px;
+    color: var(--color-brand-muted);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .page-hero-image .page-hero-eyebrow {
+    color: var(--color-brand-cyan);
+  }
+</style>

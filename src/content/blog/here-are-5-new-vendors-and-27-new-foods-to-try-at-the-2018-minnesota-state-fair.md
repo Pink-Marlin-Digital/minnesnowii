@@ -1,0 +1,32 @@
+---
+title: "Here are 5 new vendors , and 27 new foods , to try at the 2018 Minnesota State Fair"
+description: "Mango-flavored shave ice drizzled with Mexican chamoy sauce, dusted with tajin chili powder, topped with popping mango boba pearls"
+date: "2018-06-19"
+dateLabel: "June 19, 2018"
+hero: ""
+excerpt: "https://www.twincities.com/2018/06/19/minnesota-state-fair-new-foods-2018-list-turducken-sausage/"
+cardImage: "/wp-content/uploads/2021/06/IMG_8523.jpg"
+cardAlt: "Here are 5 new vendors , and 27 new foods , to try at the 2018 Minnesota State Fair"
+category: "In The News"
+categoryPath: "/category/in-the-news/"
+tags:
+  - "bar mitzvah|/tag/bar-mitzvah/"
+  - "bat mitzvah|/tag/bat-mitzvah/"
+  - "birthday parties|/tag/birthday-parties/"
+  - "catering services|/tag/catering-services/"
+  - "corporate food truck catering|/tag/corporate-food-truck-catering/"
+  - "food truck|/tag/food-truck/"
+  - "Food truck catering Minneapolis|/tag/food-truck-catering-minneapolis/"
+  - "food truck catering mn|/tag/food-truck-catering-mn/"
+  - "food truck fund raising|/tag/food-truck-fund-raising/"
+  - "google catering|/tag/google-catering/"
+  - "graduation party catering|/tag/graduation-party-catering/"
+  - "Minnesnowii|/tag/minnesnowii/"
+  - "minnesota|/tag/minnesota/"
+  - "minnesota state fair|/tag/minnesota-state-fair/"
+  - "mn|/tag/mn/"
+  - "shave ice|/tag/shave-ice/"
+  - "shaved ice|/tag/shaved-ice/"
+---
+
+https://www.twincities.com/2018/06/19/minnesota-state-fair-new-foods-2018-list-turducken-sausage/

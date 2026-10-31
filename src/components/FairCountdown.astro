@@ -1,0 +1,160 @@
+---
+import { FAIR_RANGE, FAIR_START } from '../lib/fair';
+
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+const remaining = Math.max(0, Date.parse(FAIR_START) - Date.now());
+const days = String(Math.floor(remaining / DAY)).padStart(3, '0');
+const hours = String(Math.floor((remaining % DAY) / HOUR)).padStart(2, '0');
+const minutes = String(Math.floor((remaining % HOUR) / MINUTE)).padStart(2, '0');
+const seconds = String(Math.floor((remaining % MINUTE) / SECOND)).padStart(2, '0');
+
+const dayGroup = { unit: 'days', label: 'days', digits: days };
+const timeGroups = [
+  { unit: 'hours', label: 'hours', digits: hours },
+  { unit: 'minutes', label: 'minutes', digits: minutes },
+  { unit: 'seconds', label: 'seconds', digits: seconds },
+];
+---
+
+<aside class="fair-countdown" data-fair-start={FAIR_START} aria-label={`Countdown to the 2027 Minnesota State Fair, ${FAIR_RANGE}`}>
+  <div class="fair-countdown-board" aria-hidden="true">
+    <div class="fair-unit fair-unit-days">
+      <div class="fair-digits">
+        {dayGroup.digits.split('').map((digit) => (
+          <span class="fair-digit" data-unit={dayGroup.unit}>{digit}</span>
+        ))}
+      </div>
+      <span class="fair-label">{dayGroup.label}</span>
+    </div>
+    <div class="fair-time-row">
+      {timeGroups.map((group) => (
+        <div class="fair-unit">
+          <div class="fair-digits">
+            {group.digits.split('').map((digit) => (
+              <span class="fair-digit" data-unit={group.unit}>{digit}</span>
+            ))}
+          </div>
+          <span class="fair-label">{group.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+  <h2 class="fair-countdown-title">Join us at the MN State Fair!</h2>
+  <p class="fair-countdown-place">{FAIR_RANGE}, across from the GIANT SLIDE!</p>
+</aside>
+
+<script>
+  const SECOND = 1000;
+  const MINUTE = 60 * SECOND;
+  const HOUR = 60 * MINUTE;
+  const DAY = 24 * HOUR;
+
+  function pad(value: number, length: number): string {
+    return String(Math.max(0, value)).padStart(length, '0');
+  }
+
+  function paint(root: Element): void {
+    const start = Date.parse(root.getAttribute('data-fair-start') || '');
+    if (Number.isNaN(start)) return;
+    const remaining = Math.max(0, start - Date.now());
+    const values: Record<string, string> = {
+      days: pad(Math.floor(remaining / DAY), 3),
+      hours: pad(Math.floor((remaining % DAY) / HOUR), 2),
+      minutes: pad(Math.floor((remaining % HOUR) / MINUTE), 2),
+      seconds: pad(Math.floor((remaining % MINUTE) / SECOND), 2),
+    };
+    Object.entries(values).forEach(([unit, digits]) => {
+      root.querySelectorAll(`[data-unit="${unit}"]`).forEach((slot, index) => {
+        const next = digits[index] || '0';
+        if (slot.textContent !== next) slot.textContent = next;
+      });
+    });
+  }
+
+  function tick(): void {
+    document.querySelectorAll('[data-fair-start]').forEach((root) => {
+      paint(root);
+    });
+  }
+
+  tick();
+  window.setInterval(tick, SECOND);
+</script>
+
+<style>
+  .fair-countdown {
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+    padding: 24px 16px;
+    border-radius: 24px;
+    background: #0b1c22;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .fair-countdown-board {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .fair-time-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+  }
+
+  .fair-unit {
+    display: grid;
+    gap: 6px;
+    justify-items: center;
+    min-width: 0;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(5, 217, 255, 0.12);
+  }
+
+  .fair-unit-days {
+    width: 100%;
+  }
+
+  .fair-unit-days .fair-digits {
+    font-size: 2rem;
+  }
+
+  .fair-digits {
+    display: flex;
+    gap: 2px;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .fair-label {
+    color: #9adff0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .fair-countdown-title {
+    margin: 4px 0 0;
+    color: var(--color-brand-cyan);
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+  }
+
+  .fair-countdown-place {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+</style>

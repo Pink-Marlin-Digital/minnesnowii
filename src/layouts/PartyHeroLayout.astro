@@ -1,0 +1,369 @@
+---
+import Button from '../components/atoms/Button/Button.astro';
+import Analytics from '../components/Analytics.astro';
+import Seo from '../components/Seo.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import SiteFooter from '../components/organisms/SiteFooter.astro';
+import SiteHeader from '../components/organisms/SiteHeader.astro';
+import site from '../config/site.json';
+import { bundleHref, homePage } from '../lib/pages';
+
+interface Props {
+  path: '/hero-1/' | '/hero-2/' | '/hero-3/';
+  title: string;
+  description: string;
+  variant: 1 | 2 | 3;
+}
+
+const { path, title, description, variant } = Astro.props;
+const home = homePage();
+const page = {
+  ...home,
+  path,
+  title,
+  description,
+  robots: 'noindex, follow',
+  ogTitle: title,
+  ogDescription: description,
+  jsonLd: [],
+};
+const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
+const options = [
+  { href: '/hero-1/', label: 'Option 1' },
+  { href: '/hero-2/', label: 'Option 2' },
+  { href: '/hero-3/', label: 'Option 3' },
+];
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <Seo page={page} />
+    <Analytics />
+    <link rel="stylesheet" href={bundleHref(home.stylesheets)} />
+    <link rel="stylesheet" href={`/assets/css/inline/${home.id}.css`} />
+    <link rel="stylesheet" href="/assets/css/clone.css" />
+  </head>
+  <body class="page">
+    <div id="page" class="hfeed site">
+      <SiteHeader path={path} />
+      <nav class="party-options" aria-label="Hero options">
+        <p>Compare private-party heroes</p>
+        <ul>
+          {options.map((option) => (
+            <li>
+              <a href={option.href} aria-current={option.href === path ? 'page' : undefined}>{option.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <main class="party-hero" id="content">
+        {variant === 1 && (
+          <section class="party-stage" aria-labelledby="party-hero-title">
+            <img
+              class="party-stage-photo"
+              src="/wp-content/uploads/2021/06/IMG_8994-683x1024.jpg"
+              alt="A family laughing with cups of shave ice in front of the Minnesnowii trailer"
+              width="683"
+              height="1024"
+            />
+            <div class="party-stage-copy">
+              <p class="party-kicker">Parties of 50 or more</p>
+              <h1 id="party-hero-title">What will your guests still be talking about on the drive home?</h1>
+              <p class="party-lead">You can fill the room. The harder part is giving 50 people a reason to feel glad they came.</p>
+              <div class="party-actions">
+                <Button href="/contact/">Plan the moment they remember</Button>
+                <a class="party-call" href={phoneHref}>Or call {site.business.phone}</a>
+              </div>
+            </div>
+          </section>
+        )}
+        {variant === 2 && (
+          <section class="party-split" aria-labelledby="party-hero-title">
+            <div class="party-split-copy">
+              <p class="party-kicker">For the person hosting the room</p>
+              <h1 id="party-hero-title">How many guests leave and never mention the food?</h1>
+              <p class="party-lead">Nice is not the same as satisfied. At 50 people or more, that is a lot of guests you hosted and did not move.</p>
+              <ul class="party-questions">
+                <li>What happens when the kids are finished in five minutes?</li>
+                <li>What happens when the adults never get up?</li>
+                <li>Who feels that at the end of the night?</li>
+              </ul>
+              <div class="party-actions">
+                <Button href="/contact/">Talk through a party of 50 or more</Button>
+                <a class="party-call" href={phoneHref}>Or call {site.business.phone}</a>
+              </div>
+            </div>
+            <div class="party-split-photo">
+              <img
+                src="/wp-content/uploads/2021/06/IMG_8728.jpg"
+                alt="A close view of a cup of Hawaiian shave ice topped with fruit"
+                width="1024"
+                height="1024"
+              />
+            </div>
+          </section>
+        )}
+        {variant === 3 && (
+          <section class="party-editorial" aria-labelledby="party-hero-title">
+            <p class="party-kicker">Served at the party, not across town</p>
+            <h1 id="party-hero-title">What would change if every guest left holding something they did not want to put down?</h1>
+            <p class="party-lead">You already have the date, the place, and the pressure to look after 50 or more people. Hawaiian shave ice is the part they can taste, served where the party already is.</p>
+            <div class="party-actions">
+              <Button href="/contact/">Tell us the date and the headcount</Button>
+              <a class="party-call" href={phoneHref}>Or call {site.business.phone}</a>
+            </div>
+            <ul class="party-photos">
+              <li>
+                <img src="/wp-content/uploads/2021/06/IMG_7778.jpg" alt="A server handing a cup of shave ice to a guest" width="1024" height="768" />
+              </li>
+              <li>
+                <img src="/wp-content/uploads/2021/06/IMG_7048.jpg" alt="Rainbow shave ice in a cup" width="1024" height="768" />
+              </li>
+              <li>
+                <img src="/wp-content/uploads/2021/06/IMG_8018-902x1024.jpg" alt="Guests smiling together with cups of shave ice" width="902" height="1024" />
+              </li>
+            </ul>
+          </section>
+        )}
+      </main>
+      <FairCountdown />
+      <SiteFooter />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  .party-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 10px 20px;
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .party-options p {
+    margin: 0;
+  }
+
+  .party-options ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .party-options a {
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+  }
+
+  .party-options a[aria-current="page"] {
+    border-color: #ee292f;
+    color: #fff;
+  }
+
+  .party-options a:hover,
+  .party-options a:focus-visible {
+    color: #ee292f;
+  }
+
+  .party-hero {
+    font-size: 16px;
+    color: #111;
+    background: #fff;
+  }
+
+  .party-kicker {
+    margin: 0 0 12px;
+    color: #ee292f;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .party-hero h1 {
+    margin: 0 0 16px;
+    color: inherit;
+    font-family: var(--font-brand);
+    font-size: clamp(32px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1.08;
+    height: auto;
+  }
+
+  .party-lead {
+    margin: 0 0 24px;
+    max-width: 38rem;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .party-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    align-items: center;
+  }
+
+  .party-call {
+    color: inherit;
+    font-weight: 700;
+  }
+
+  .party-stage {
+    position: relative;
+    display: grid;
+    align-items: end;
+    min-height: max(560px, calc(100svh - 180px));
+    overflow: hidden;
+    color: #fff;
+  }
+
+  .party-stage-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .party-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.42) 52%, rgba(0, 0, 0, 0.12) 100%);
+  }
+
+  .party-stage-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    padding: 48px 24px 64px;
+  }
+
+  .party-stage .party-kicker {
+    color: #03d9ff;
+  }
+
+  .party-stage h1,
+  .party-stage .party-lead,
+  .party-stage .party-call {
+    color: #fff;
+  }
+
+  .party-split {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .party-split-copy {
+    padding: 48px 24px 56px;
+  }
+
+  .party-questions {
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .party-questions li {
+    margin: 0;
+    padding: 14px 0;
+    border-top: 1px solid #e6e6e6;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .party-split-photo {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+  }
+
+  .party-split-photo img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .party-editorial {
+    padding: 48px 24px 32px;
+  }
+
+  .party-editorial h1 {
+    max-width: 16ch;
+  }
+
+  .party-photos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 36px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .party-photos img {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 699px) {
+    .party-stage::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.78) 70%);
+    }
+
+    .party-stage-copy {
+      padding-top: 38vh;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .party-photos {
+      grid-template-columns: 1.15fr 0.85fr 1fr;
+    }
+
+    .party-photos img {
+      height: 320px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .party-split {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      min-height: max(640px, calc(100svh - 180px));
+    }
+
+    .party-split-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 48px;
+    }
+
+    .party-split-photo {
+      min-height: 100%;
+    }
+
+    .party-editorial {
+      padding: 72px 48px 40px;
+    }
+  }
+</style>

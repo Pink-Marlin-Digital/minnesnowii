@@ -192,9 +192,22 @@ function rewriteHtml(html, pageUrl) {
   return out;
 }
 
-function enhanceForms(html, pagePath) {
+function enhanceForms(html) {
   let index = 0;
   return html.replace(/<form\b([^>]*)>/gi, (full, attrs) => {
+    const isSearch = /search-form/i.test(attrs) || /role=(['"])search\1/i.test(attrs);
+    if (isSearch) {
+      let next = attrs
+        .replace(/\saction=(['"]).*?\1/gi, '')
+        .replace(/\smethod=(['"]).*?\1/gi, '')
+        .replace(/\sonsubmit=(['"]).*?\1/gi, '')
+        .replace(/\starget=(['"]).*?\1/gi, '')
+        .replace(/\sdata-netlify=(['"]).*?\1/gi, '')
+        .replace(/\snetlify-honeypot=(['"]).*?\1/gi, '')
+        .replace(/\sname=(['"]).*?\1/gi, '');
+      if (next.length && !next.startsWith(' ')) next = ` ${next}`;
+      return `<form${next} method="GET" action="/">`;
+    }
     index += 1;
     const idMatch = attrs.match(/\bid=(['"])(.*?)\1/i);
     const rawId = idMatch ? idMatch[2] : `form-${index}`;
@@ -208,7 +221,7 @@ function enhanceForms(html, pagePath) {
       .replace(/\snetlify-honeypot=(['"]).*?\1/gi, '')
       .replace(/\sname=(['"]).*?\1/gi, '');
     if (next.length && !next.startsWith(' ')) next = ` ${next}`;
-    return `<form${next} method="POST" action="${pagePath}" name="${name}" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="${name}" /><input class="netlify-honeypot" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />`;
+    return `<form${next} method="POST" action="/thank-you/" name="${name}" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="${name}" /><input class="netlify-honeypot" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />`;
   });
 }
 
@@ -410,7 +423,10 @@ async function scrapeOne(context, urlPath, { notFound = false } = {}) {
 
     const pageUrl = `${ORIGIN}${finalPath}`;
     let html = rewriteHtml(captured.html, pageUrl);
-    html = enhanceForms(html, finalPath);
+    html = html
+      .replace(/<div id="comments" class="comments-area">[\s\S]*?<!-- #comments -->/gi, '')
+      .replace(/(?:\s|&nbsp;)*\|(?:\s|&nbsp;)*<span class="comments-link">[\s\S]*?<\/a>\s*<\/span>/gi, '');
+    html = enhanceForms(html);
     const inlineCss = rewriteCss(captured.inlineCss || '', pageUrl);
     const lcpMatch = html.match(/<img\b[^>]*\bsrc=(['"])(.*?)\1/i);
     const stylesheets = [];

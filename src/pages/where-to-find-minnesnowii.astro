@@ -1,0 +1,79 @@
+---
+import PageHero from '../components/molecules/PageHero/PageHero.astro';
+import SectionHeader from '../components/molecules/SectionHeader/SectionHeader.astro';
+import NewsletterForm from '../components/molecules/FormField/NewsletterForm.astro';
+import CtaGroup from '../components/molecules/CtaGroup/CtaGroup.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { createPageSeo } from '../lib/seo';
+import content from '../content/pages/where-to-find.json';
+import site from '../config/site.json';
+
+const page = createPageSeo({
+  id: content.id,
+  path: content.path,
+  title: content.title,
+  description: content.description,
+  ogTitle: content.heroTitle,
+});
+---
+
+<SiteLayout page={page}>
+  <PageHero title={content.heroTitle} />
+  <div class="page-wrap find-page">
+    <FairCountdown />
+    <section>
+      <SectionHeader title={content.introTitle} display align="center" />
+      {content.intro.map((paragraph) => <Text class="muted">{paragraph}</Text>)}
+    </section>
+    <section class="find-newsletter">
+      <SectionHeader title={content.newsletterCta} />
+      <NewsletterForm />
+    </section>
+    <section class="find-service">
+      <Text>{content.serviceNote}</Text>
+      <CtaGroup
+        primaryHref="/contact/"
+        primaryLabel="Book Us"
+        secondaryHref={`tel:${site.business.phone.replace(/[^\d+]/g, '')}`}
+        secondaryLabel={`Call ${site.business.phone}`}
+      />
+      <div class="social-links">
+        {site.social.map((item) => (
+          <a href={item.url} target="_blank" rel="noreferrer">{item.platform}</a>
+        ))}
+      </div>
+    </section>
+  </div>
+</SiteLayout>
+
+<style>
+  .find-page {
+    display: grid;
+    gap: 36px;
+    padding: 24px 0 64px;
+  }
+
+  .find-newsletter,
+  .find-service {
+    display: grid;
+    gap: 16px;
+    padding: 28px;
+    border-radius: 24px;
+    background: var(--color-brand-ice);
+  }
+
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+
+  .social-links a {
+    font-weight: 700;
+    text-transform: capitalize;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

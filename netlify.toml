@@ -36,3 +36,149 @@
   for = "/assets/css/bundles/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Legacy WordPress archives and moved URLs
+[[redirects]]
+  from = "/tag/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/category/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/author/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/events-2/"
+  to = "/where-to-find-minnesnowii/"
+  status = 301
+
+[[redirects]]
+  from = "/in-the-news/"
+  to = "/in-the-media/"
+  status = 301
+
+[[redirects]]
+  from = "/contest/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/shop/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/32-new-foods-to-try-at-the-2016-minnesota-state-fair/"
+  to = "/blog/32-new-foods-to-try-at-the-2016-minnesota-state-fair/"
+  status = 301
+
+[[redirects]]
+  from = "/5-most-insane-new-state-fair-foods/"
+  to = "/blog/5-most-insane-new-state-fair-foods/"
+  status = 301
+
+[[redirects]]
+  from = "/all-the-food-worth-trying-at-the-minnesota-state-fair/"
+  to = "/blog/all-the-food-worth-trying-at-the-minnesota-state-fair/"
+  status = 301
+
+[[redirects]]
+  from = "/give-me-the-mike-and-kstps-twin-cities-live-at-the-minnesota-state-fair/"
+  to = "/blog/give-me-the-mike-and-kstps-twin-cities-live-at-the-minnesota-state-fair/"
+  status = 301
+
+[[redirects]]
+  from = "/here-are-5-new-vendors-and-27-new-foods-to-try-at-the-2018-minnesota-state-fair/"
+  to = "/blog/here-are-5-new-vendors-and-27-new-foods-to-try-at-the-2018-minnesota-state-fair/"
+  status = 301
+
+[[redirects]]
+  from = "/jason-derusha-from-wcco-stops-by-to-make-some-shave-ice/"
+  to = "/blog/jason-derusha-from-wcco-stops-by-to-make-some-shave-ice/"
+  status = 301
+
+[[redirects]]
+  from = "/kick-off-to-summer-at-the-fair/"
+  to = "/blog/kick-off-to-summer-at-the-fair/"
+  status = 301
+
+[[redirects]]
+  from = "/maple-bacon-shave-ice/"
+  to = "/blog/maple-bacon-shave-ice/"
+  status = 301
+
+[[redirects]]
+  from = "/minnesnowiis-new-website/"
+  to = "/blog/minnesnowiis-new-website/"
+  status = 301
+
+[[redirects]]
+  from = "/minnesota-state-fair-reveals-27-new-food/"
+  to = "/blog/minnesota-state-fair-reveals-27-new-food/"
+  status = 301
+
+[[redirects]]
+  from = "/mn-state-fair-reveals-new-foods-for-2018/"
+  to = "/blog/mn-state-fair-reveals-new-foods-for-2018/"
+  status = 301
+
+[[redirects]]
+  from = "/mpls-st-paul-business-magazine/"
+  to = "/blog/mpls-st-paul-business-magazine/"
+  status = 301
+
+[[redirects]]
+  from = "/phatphood-2016-minnesota-state-fair-food-review/"
+  to = "/blog/phatphood-2016-minnesota-state-fair-food-review/"
+  status = 301
+
+[[redirects]]
+  from = "/shout-out-from-eater/"
+  to = "/blog/shout-out-from-eater/"
+  status = 301
+
+[[redirects]]
+  from = "/state-fair-vendors-focus-of-debate-over-black-lives-matter-protest/"
+  to = "/blog/state-fair-vendors-focus-of-debate-over-black-lives-matter-protest/"
+  status = 301
+
+[[redirects]]
+  from = "/the-deets-on-the-ice/"
+  to = "/blog/the-deets-on-the-ice/"
+  status = 301
+
+[[redirects]]
+  from = "/the-story-behind-one-of-the-fairs-snowy-treats/"
+  to = "/blog/the-story-behind-one-of-the-fairs-snowy-treats/"
+  status = 301
+
+[[redirects]]
+  from = "/voted-best-minnesota-state-fair-food-vendor-from-the-star-tribune/"
+  to = "/blog/voted-best-minnesota-state-fair-food-vendor-from-the-star-tribune/"
+  status = 301
+
+[[redirects]]
+  from = "/wall-street-journal/"
+  to = "/blog/wall-street-journal/"
+  status = 301
+
+[[redirects]]
+  from = "/why-we-call-it-shave-ice-and-not-shaved-ice/"
+  to = "/blog/why-we-call-it-shave-ice-and-not-shaved-ice/"
+  status = 301
+
+[[redirects]]
+  from = "/yes-we-cater-all-events/"
+  to = "/blog/yes-we-cater-all-events/"
+  status = 301
+
+[[redirects]]
+  from = "/young-entrepreneur-scores-big-with-state-fair-booth/"
+  to = "/blog/young-entrepreneur-scores-big-with-state-fair-booth/"
+  status = 301

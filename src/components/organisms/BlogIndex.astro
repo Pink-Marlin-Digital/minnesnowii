@@ -1,0 +1,53 @@
+---
+import FairCountdown from '../FairCountdown.astro';
+import PostCard from '../molecules/PostCard/PostCard.astro';
+import './BlogIndexFilter/BlogIndexFilter.css';
+import { listPosts } from '../../lib/blog';
+
+const posts = await listPosts();
+---
+
+<section class="blog-index">
+  <header class="blog-index-heading page-wrap">
+    <h1 class="page-title">Blog</h1>
+  </header>
+
+  <div class="blog-filter">
+    <ul class="cup-grid">
+      {posts.map((post) => (
+        <li>
+          <PostCard
+            href={`/blog/${post.slug}/`}
+            title={post.title}
+            excerpt={post.excerpt}
+            dateLabel={post.dateLabel}
+            image={post.cardImage}
+            imageAlt={post.cardAlt}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="blog-countdown page-wrap">
+    <FairCountdown />
+  </div>
+</section>
+
+<style>
+  .blog-index-heading {
+    padding-top: 28px;
+    padding-bottom: 16px;
+  }
+
+  .page-title {
+    margin: 0;
+    font-family: var(--font-brand);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+  }
+
+  .blog-countdown {
+    padding-bottom: 48px;
+  }
+</style>

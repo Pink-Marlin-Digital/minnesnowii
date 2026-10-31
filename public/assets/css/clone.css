@@ -11,6 +11,138 @@
   display: none !important;
 }
 
+/* Footer labels are hidden. The text stays in the markup so Netlify can use it in the notification email. */
+.footer-right .gfield_label {
+  display: none !important;
+}
+
+/* Inputs sit inside their labels so Netlify copies the label into the email. Keep those labels full width so percentage field widths still fill the column. */
+.gform_legacy_markup_wrapper .top_label label.gfield_label:has(.ginput_container),
+.footer-right .gform_fields > li > label {
+  display: block;
+  width: 100%;
+}
+
+.gform_legacy_markup_wrapper .top_label label.gfield_label:has(.ginput_container) > .ginput_container,
+.footer-right .gform_fields > li > label > .ginput_container {
+  width: 100%;
+}
+
+.gform_legacy_markup_wrapper .field_sublabel_below .ginput_complex.ginput_container label {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+  letter-spacing: normal;
+  white-space: normal;
+}
+
+.gform_legacy_markup_wrapper .field_sublabel_below .ginput_complex.ginput_container label .sublabel {
+  display: block;
+  margin: 1px 0 9px 1px;
+  font-size: 0.813em;
+  letter-spacing: 0.5pt;
+  white-space: nowrap;
+}
+
+.gform_legacy_markup_wrapper label.gfield_label input,
+.gform_legacy_markup_wrapper label.gfield_label textarea,
+.gform_legacy_markup_wrapper label.gfield_label select {
+  font-weight: 400;
+}
+
+.gform_legacy_markup_wrapper ul.gfield_checkbox li label:has(input),
+.gform_legacy_markup_wrapper ul.gfield_radio li label:has(input) {
+  width: auto;
+  max-width: 100%;
+}
+
+.gform_legacy_markup_wrapper ul.gfield_checkbox li label:has(input) input,
+.gform_legacy_markup_wrapper ul.gfield_radio li label:has(input) input {
+  margin-right: 8px;
+}
+
+.gform_legacy_markup_wrapper ul.gfield_checkbox li label:has(input:checked),
+.gform_legacy_markup_wrapper ul.gfield_radio li label:has(input:checked) {
+  font-weight: 700;
+}
+
+/* Booking form on /contact/: every field fills the column. */
+#gform_2 .ginput_container input:not([type='radio']):not([type='checkbox']):not([type='hidden']):not([type='submit']),
+#gform_2 .ginput_container select,
+#gform_2 .ginput_complex input:not([type='hidden']) {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#gform_2 .ginput_complex.ginput_container,
+#gform_2 .ginput_complex .ginput_full,
+#gform_2 .ginput_complex .ginput_left,
+#gform_2 .ginput_complex .ginput_right {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0 !important;
+  float: none;
+}
+
+#gform_2 ul.gfield_radio {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px 20px;
+  width: 100%;
+}
+
+#gform_2 ul.gfield_radio > li {
+  display: flex;
+  flex: 1 1 12rem;
+  width: auto;
+  margin: 0;
+  overflow: visible;
+}
+
+#gform_2 ul.gfield_radio > li label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  #gform_2 ul.gfield_radio {
+    flex-direction: column;
+  }
+
+  #gform_2 ul.gfield_radio > li {
+    flex-basis: auto;
+    width: 100%;
+  }
+}
+
+.form-success {
+  max-width: 720px;
+  margin: 72px auto 96px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.form-success h1 {
+  color: #03d9ff;
+}
+
+.form-success a {
+  color: #03d9ff;
+}
+
+.form-success-phone {
+  color: #fffd38;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
 /* Cloudflare Turnstile is rendered by a third-party script. Reserve the same space the live widget occupies. */
 .gf-turnstile-container {
   min-height: 94px;
@@ -23,6 +155,92 @@
     left: 0 !important;
     margin-left: 0 !important;
   }
+}
+
+/* Shared 2027 state fair countdown. Scoped so every page can render it without the plugin stylesheet. */
+.fair-countdown {
+  text-align: center;
+}
+
+.fair-countdown .carbonlite-dashboard {
+  height: 63px;
+  width: 250px;
+  margin: 0 auto;
+  padding-top: 10px;
+  background: transparent url("/wp-content/plugins/jquery-t-countdown-widget/css/carbonlite/images/bg_countdown.png") 0 0 no-repeat;
+  text-align: center;
+}
+
+.fair-countdown .carbonlite-dash,
+.fair-countdown .carbonlite-tripdash {
+  display: inline-block;
+  height: 44px;
+  margin-left: 2px;
+  padding-left: 2px;
+  padding-top: 10px;
+  position: relative;
+  color: #fff;
+}
+
+.fair-countdown .carbonlite-dash {
+  width: 42px;
+}
+
+.fair-countdown .carbonlite-tripdash {
+  width: 62px;
+}
+
+.fair-countdown .carbonlite-hours_dash,
+.fair-countdown .carbonlite-minutes_dash,
+.fair-countdown .carbonlite-seconds_dash {
+  background: transparent url("/wp-content/plugins/jquery-t-countdown-widget/css/carbonlite/images/bg_dash.png") 0 0 no-repeat;
+}
+
+.fair-countdown .carbonlite-days_trip_dash {
+  background: transparent url("/wp-content/plugins/jquery-t-countdown-widget/css/carbonlite/images/bg_trip_dash.png") 0 0 no-repeat;
+}
+
+.fair-countdown .carbonlite-digit {
+  font: normal normal normal 12pt/normal arial;
+  font-variant-numeric: tabular-nums;
+  float: left;
+  width: 17px;
+  line-height: 18px;
+  text-align: center;
+  position: relative;
+}
+
+.fair-countdown .carbonlite-dash_title {
+  display: block;
+  position: absolute;
+  text-transform: uppercase;
+  top: 33px;
+  color: #aaa;
+  text-align: center;
+  font-size: 9px;
+}
+
+.fair-countdown .carbonlite-dash .carbonlite-dash_title {
+  left: 0;
+  width: 100%;
+}
+
+.fair-countdown .carbonlite-tripdash .carbonlite-dash_title {
+  left: 17px;
+}
+
+.fair-countdown-title,
+.fair-countdown-place {
+  text-align: center;
+}
+
+.fair-countdown-title {
+  color: #03d9ff;
+}
+
+.fair-countdown-place {
+  font-weight: bold;
+  margin-top: 8px;
 }
 
 /* Nivo Slider sizes slides with JavaScript. Keep the current slide inside the phone viewport. */

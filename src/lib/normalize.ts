@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 const INTERNAL_HOSTS = new Set([
   'minnesnowii.com',
   'www.minnesnowii.com',
+  'minnesnowii.netlify.app',
   '127.0.0.1',
   'localhost',
 ]);

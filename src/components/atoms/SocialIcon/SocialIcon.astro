@@ -1,0 +1,48 @@
+---
+import { getAttributes, toString } from '@carbon/icon-helpers';
+import LogoFacebook from '@carbon/icons/es/logo--facebook/20.js';
+import LogoInstagram from '@carbon/icons/es/logo--instagram/20.js';
+import LogoTwitter from '@carbon/icons/es/logo--twitter/20.js';
+
+interface Props {
+  platform: string;
+  class?: string;
+}
+
+const { platform, class: className } = Astro.props;
+
+const icons: Record<string, typeof LogoFacebook> = {
+  facebook: LogoFacebook,
+  twitter: LogoTwitter,
+  instagram: LogoInstagram,
+};
+
+const icon = icons[platform.toLowerCase()];
+if (!icon) {
+  throw new Error(`Unknown social platform icon: ${platform}`);
+}
+
+const svg = toString({
+  ...icon,
+  attrs: getAttributes({
+    ...icon.attrs,
+    'aria-hidden': 'true',
+    focusable: 'false',
+  }),
+});
+---
+
+<span class:list={['social-icon', className]} set:html={svg} />
+
+<style>
+  .social-icon {
+    display: inline-flex;
+    line-height: 0;
+  }
+
+  .social-icon :global(svg) {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>

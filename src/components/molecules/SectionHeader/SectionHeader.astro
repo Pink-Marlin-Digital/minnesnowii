@@ -1,0 +1,35 @@
+---
+import Heading from '../../atoms/Heading/Heading.astro';
+import Text from '../../atoms/Text/Text.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  display?: boolean;
+}
+
+const { title, description, align = 'left', display = false } = Astro.props;
+---
+
+<div class:list={['section-header', align === 'center' && 'is-center']}>
+  <Heading level={2} class={display ? 'display' : ''}>{title}</Heading>
+  {description && <Text class="lead muted">{description}</Text>}
+</div>
+
+<style>
+  .section-header {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .section-header.is-center {
+    text-align: center;
+    justify-items: center;
+  }
+
+  .section-header.is-center :global(.text) {
+    max-width: 42rem;
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+import FairCountdown from '../FairCountdown.astro';
+import { preparePageHtml } from '../../lib/prepare-html';
+import { readPageHtml } from '../../lib/pages';
+import { relayoutShaveIce } from '../../lib/shave-ice-masonry';
+import type { PageData } from '../../lib/pages';
+
+interface Props {
+  page: PageData;
+}
+
+const { page } = Astro.props;
+const parts = preparePageHtml(relayoutShaveIce(readPageHtml(page)));
+---
+
+{parts.map((part, index) => (
+  <Fragment>
+    <Fragment set:html={part} />
+    {index < parts.length - 1 && <FairCountdown />}
+  </Fragment>
+))}
+
+<style is:global>
+  #post-343 .entry-content,
+  #post-343 .vc_column-inner,
+  #post-343 .wpb_wrapper {
+    max-width: 100%;
+  }
+
+  #post-343 .vc_row[data-vc-full-width='true'] {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .shave-masonry {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 42vw;
+    grid-auto-flow: dense;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 1.75rem;
+    box-sizing: border-box;
+  }
+
+  .shave-tile {
+    display: block;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #f4f7f8;
+  }
+
+  .shave-tile img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .shave-tile-tall {
+    grid-row: span 2;
+  }
+
+  .shave-tile-wide {
+    grid-column: span 2;
+  }
+
+  .shave-tile-feature {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  @media (min-width: 700px) {
+    .shave-masonry {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: 200px;
+      gap: 10px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .shave-masonry {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: 240px;
+      gap: 12px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .shave-masonry {
+      grid-auto-rows: 280px;
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .shave-tile img {
+      transition: transform 0.35s ease;
+    }
+
+    .shave-tile:hover img,
+    .shave-tile:focus-visible img {
+      transform: scale(1.045);
+    }
+  }
+
+  .shave-tile:focus-visible {
+    outline: 3px solid #03d9ff;
+    outline-offset: 2px;
+  }
+</style>

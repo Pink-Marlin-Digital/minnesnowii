@@ -1,0 +1,190 @@
+---
+import SocialIcon from '../atoms/SocialIcon/SocialIcon.astro';
+import ContactForm from '../molecules/FormField/ContactForm.astro';
+import site from '../../config/site.json';
+
+const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
+const links = site.navigation.footer;
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-grid page-wrap">
+    <div class="footer-brand">
+      <img src={site.brand.logo.light} alt="Minnesnowii" width="148" height="78" />
+      <p class="footer-address">
+        {site.business.address.street}<br />
+        {site.business.address.city} {site.business.address.state}
+      </p>
+      <a class="footer-phone" href={phoneHref}>
+        <span>Book Us Today!</span>
+        <strong>{site.business.phone}</strong>
+      </a>
+      <div class="footer-social">
+        {site.social.map((item) => (
+          <a
+            class="footer-social-link"
+            href={item.url}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={item.platform.charAt(0).toUpperCase() + item.platform.slice(1)}
+          >
+            <SocialIcon platform={item.icon || item.platform} />
+          </a>
+        ))}
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <ul>
+        {links.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="footer-form">
+      <h2 class="footer-form-title">Send a message</h2>
+      <ContactForm formName="minnesnowii-gform_1" />
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>
+      © 2026 Minnesnowii. All rights reserved. Favicon by <a href="https://www.flaticon.com">Flaticon.</a>
+      Site design by <a href="https://horsetrainersolutions.com" target="_blank" rel="noreferrer">Horse Trainer Solutions.</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #0b1c22;
+    color: #ffffff;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 32px;
+    padding: 40px 0 28px;
+  }
+
+  .footer-brand {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+  }
+
+  .footer-brand img {
+    height: 64px;
+    width: auto;
+  }
+
+  .footer-address {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .footer-phone {
+    display: grid;
+    gap: 2px;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .footer-phone span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .footer-phone strong {
+    color: var(--color-brand-cyan);
+    font-size: 1.25rem;
+  }
+
+  .footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+  }
+
+  .footer-social-link:hover,
+  .footer-social-link:focus-visible {
+    color: var(--color-brand-ink);
+    background: var(--color-brand-cyan);
+  }
+
+  .footer-social-link:focus-visible {
+    outline: 3px solid var(--color-brand-cyan);
+    outline-offset: 2px;
+  }
+
+  .footer-nav ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-nav a {
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover,
+  .footer-nav a:focus-visible {
+    color: var(--color-brand-cyan);
+  }
+
+  .footer-form-title {
+    margin: 0 0 14px;
+    font-family: var(--font-brand);
+    font-size: 1.35rem;
+    font-weight: 400;
+  }
+
+  .footer-form :global(.contact-form) {
+    max-width: none;
+  }
+
+  .footer-form :global(.field-label),
+  .footer-form :global(.field-control) {
+    color: var(--color-brand-ink);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 16px 24px 28px;
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom a {
+    color: #ac9631;
+  }
+
+  @media (min-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1.1fr 0.8fr 1.2fr;
+      align-items: start;
+    }
+  }
+</style>

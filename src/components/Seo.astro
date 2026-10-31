@@ -1,47 +1,66 @@
 ---
-import type { PageData } from '../lib/pages';
+import site from '../config/site.json';
+import type { PageSeo } from '../lib/seo';
 
 interface Props {
-  page: PageData;
+  page: PageSeo;
 }
 
 const { page } = Astro.props;
-const origin = (Astro.site ?? new URL('https://minnesnowii.com')).toString().replace(/\/$/, '');
+const origin = (Astro.site ?? new URL(site.baseUrl)).toString().replace(/\/$/, '');
+const assetOrigin = site.hostedUrl.replace(/\/$/, '');
 
-function absoluteUrl(value: string): string {
-  if (!value) {
-    return `${origin}/wp-content/uploads/2021/07/Artboard-1@2x.png`;
-  }
-  if (value.startsWith('http://') || value.startsWith('https://')) {
-    return value
-      .replaceAll('https://minnesnowii.com', origin)
-      .replaceAll('http://minnesnowii.com', origin);
-  }
-  return new URL(value, `${origin}/`).href;
+function localAsset(value: string): string {
+  const fallback = site.seo.defaultImage;
+  if (!value) return fallback;
+  return value.replace(
+    /https?:\/\/(?:www\.)?(?:minnesnowii\.com|minnesnowii\.netlify\.app|3\.129\.217\.11)(?=\/(?:wp-content|wp-includes|assets)\/)/gi,
+    '',
+  ) || fallback;
+}
+
+function hostedAsset(value: string): string {
+  const path = localAsset(value);
+  if (!path.startsWith('/')) return path;
+  return `${assetOrigin}${path}`;
+}
+
+function usableText(value: string | undefined): string {
+  const text = (value || '').trim();
+  if (!text || /^read more\.?$/i.test(text)) return '';
+  return text;
 }
 
 const canonical = new URL(page.path, `${origin}/`).href;
-const image = absoluteUrl(page.ogImage);
+const image = hostedAsset(page.ogImage || site.seo.defaultImage);
 const title = page.ogTitle || page.title;
-const description = page.ogDescription || page.description;
-const jsonLd = page.jsonLd.map((block) =>
-  block
-    .replaceAll('https://minnesnowii.com', origin)
-    .replaceAll('http://minnesnowii.com', origin)
+const description = usableText(page.description)
+  || usableText(page.ogDescription)
+  || site.seo.defaultDescription;
+const socialDescription = usableText(page.ogDescription)
+  || usableText(page.description)
+  || site.seo.defaultDescription;
+const jsonLd = (page.jsonLd || []).map((block) =>
+  localAsset(block)
+    .replace(
+      /(["'])(\/(?:wp-content|wp-includes|assets)\/[^"']*)\1/g,
+      (_match, quote: string, path: string) => `${quote}${assetOrigin}${path}${quote}`,
+    )
     .replaceAll('</', '<\\/'),
 );
+const icons = page.icons || [];
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{page.title}</title>
-<meta name="description" content={page.description} />
+<meta name="description" content={description} />
 <meta name="robots" content={page.robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
 <link rel="canonical" href={canonical} />
 <meta property="og:locale" content={page.ogLocale || 'en_US'} />
 <meta property="og:type" content={page.ogType || 'website'} />
 <meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={socialDescription} />
 <meta property="og:url" content={canonical} />
 <meta property="og:site_name" content="Minnesnowii Shave Ice" />
 <meta property="og:image" content={image} />
@@ -51,11 +70,11 @@ const jsonLd = page.jsonLd.map((block) =>
 <meta name="twitter:card" content={page.twitterCard || 'summary_large_image'} />
 <meta name="twitter:site" content={page.twitterSite || '@Minnesnowii'} />
 <meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={socialDescription} />
 <meta name="twitter:image" content={image} />
 <meta name="twitter:image:alt" content={title} />
 {
-  page.icons.map((icon) => (
+  icons.map((icon) => (
     <link rel={icon.rel} href={icon.href} sizes={icon.sizes || undefined} type={icon.type || undefined} />
   ))
 }

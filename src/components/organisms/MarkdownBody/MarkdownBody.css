@@ -1,0 +1,53 @@
+.markdown-body {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.markdown-body > *:first-child {
+  margin-top: 0;
+}
+
+.markdown-body p {
+  margin: 0 0 1.1rem;
+}
+
+.markdown-body a {
+  color: var(--color-brand-muted);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus-visible {
+  color: var(--color-brand-red);
+}
+
+.markdown-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 1.1rem;
+  border-radius: 12px;
+}
+
+.markdown-body strong {
+  font-weight: 800;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.25rem;
+}
+
+.markdown-body iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: 0 0 1.1rem;
+  border: 0;
+  border-radius: 12px;
+}

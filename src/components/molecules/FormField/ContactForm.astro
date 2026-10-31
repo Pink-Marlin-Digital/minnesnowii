@@ -1,0 +1,48 @@
+---
+import Button from '../../atoms/Button/Button.astro';
+import Input from '../../atoms/Input/Input.astro';
+import Textarea from '../../atoms/Textarea/Textarea.astro';
+
+interface Props {
+  formName?: string;
+  subject?: string;
+}
+
+const {
+  formName = 'minnesnowii-contact',
+  subject = 'New website message',
+} = Astro.props;
+---
+
+<form
+  class="contact-form"
+  name={formName}
+  method="POST"
+  action="/thank-you/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value={formName} />
+  <input type="hidden" name="subject" value={subject} />
+  <input class="netlify-honeypot" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <Input id="contact-name" name="name" label="Name" required autocomplete="name" />
+  <Input id="contact-email" name="email" type="email" label="Email" required autocomplete="email" />
+  <Textarea id="contact-message" name="message" label="Message" required />
+  <Button type="submit">Submit</Button>
+</form>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: 16px;
+    max-width: 560px;
+  }
+
+  .netlify-honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+</style>

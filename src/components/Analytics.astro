@@ -1,0 +1,113 @@
+---
+import site from '../config/site.json';
+
+const fromEnv = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const measurementId = String(fromEnv || site.analytics.measurementId || '').trim();
+const enabled = /^G-[A-Z0-9]+$/.test(measurementId);
+---
+
+{
+  enabled && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+      <script is:inline define:vars={{ measurementId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('set', 'linker', {
+          domains: ['minnesnowii.com', 'www.minnesnowii.com', 'minnesnowii.netlify.app'],
+        });
+        var campaign = { send_page_view: true };
+        var query = new URLSearchParams(location.search);
+        if (query.has('ga_debug')) campaign.debug_mode = true;
+        var source = query.get('utm_source');
+        var medium = query.get('utm_medium');
+        var campaignName = query.get('utm_campaign');
+        var term = query.get('utm_term');
+        var content = query.get('utm_content');
+        if (source) campaign.campaign_source = source;
+        if (medium) campaign.campaign_medium = medium;
+        if (campaignName) campaign.campaign_name = campaignName;
+        if (term) campaign.campaign_term = term;
+        if (content) campaign.campaign_content = content;
+        gtag('config', measurementId, campaign);
+
+        var formLabels = {
+          'minnesnowii-gform_1': 'footer_contact',
+          'minnesnowii-gform_2': 'booking_request',
+          'minnesnowii-gform_3': 'contest_entry',
+          'minnesnowii-gform_4': 'newsletter',
+          'minnesnowii-commentform': 'comment',
+        };
+        var pendingKey = 'minnesnowii-form';
+
+        document.addEventListener('submit', function (event) {
+          var form = event.target;
+          if (!(form instanceof HTMLFormElement)) return;
+          if ((form.getAttribute('method') || '').toLowerCase() !== 'post') return;
+          var trap = form.querySelector('[name="bot-field"]');
+          if (trap instanceof HTMLInputElement && trap.value) return;
+          var rawName = form.getAttribute('name') || form.id || 'form';
+          try {
+            sessionStorage.setItem(pendingKey, JSON.stringify({
+              form_name: formLabels[rawName] || rawName,
+              form_id: rawName,
+              page_path: location.pathname,
+            }));
+          } catch {
+            /* Storage can be blocked. The thank-you page then has nothing to send. */
+          }
+        }, true);
+
+        if (location.pathname.replace(/\/+$/, '') === '/thank-you') {
+          try {
+            var pending = sessionStorage.getItem(pendingKey);
+            if (pending) {
+              sessionStorage.removeItem(pendingKey);
+              var details = JSON.parse(pending);
+              gtag('event', 'generate_lead', {
+                form_name: details.form_name,
+                form_id: details.form_id,
+                form_page: details.page_path,
+              });
+            }
+          } catch {
+            /* Ignore a malformed pending form record. */
+          }
+        }
+
+        document.addEventListener('click', function (event) {
+          var target = event.target;
+          if (!(target instanceof Element)) return;
+          var link = target.closest('a');
+          if (!link) return;
+          var href = link.getAttribute('href') || '';
+          var text = (link.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+          var ctaType = '';
+          if (
+            href.indexOf('tel:') === 0
+            || link.classList.contains('book-today')
+            || link.classList.contains('home-call')
+            || link.classList.contains('footer-phone-link')
+          ) {
+            ctaType = 'phone';
+          } else if (link.classList.contains('home-cta') || /book us|plan the moment/i.test(text)) {
+            ctaType = 'book';
+          } else if (/^\/contact\/?$/.test(href)) {
+            ctaType = 'contact';
+          } else if (/find us/i.test(text) || href.indexOf('where-to-find') !== -1) {
+            ctaType = 'find';
+          }
+          if (!ctaType) return;
+          gtag('event', 'cta_click', {
+            cta_type: ctaType,
+            link_url: href,
+            link_text: text,
+            click_page: location.pathname,
+          });
+        }, true);
+      </script>
+    </>
+  )
+}

@@ -1,11 +1,41 @@
 ---
+import Heading from '../components/atoms/Heading/Heading.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import Button from '../components/atoms/Button/Button.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { notFoundPage } from '../lib/pages';
+import { createPageSeo } from '../lib/seo';
 
-const page = notFoundPage();
-if (!page) {
-  throw new Error('Manifest is missing the 404 page.');
-}
+const page = createPageSeo({
+  id: 'not-found',
+  path: '/404/',
+  title: 'Page not found - Minnesnowii Shave Ice',
+  description: 'The page you requested could not be found.',
+  robots: 'noindex, follow',
+});
 ---
 
-<SiteLayout page={page} />
+<SiteLayout page={page}>
+  <div class="page-wrap not-found">
+    <Heading level={1}>Page not found</Heading>
+    <Text>That page melted away. Try the home page or the blog.</Text>
+    <div class="not-found-actions">
+      <Button href="/">Home</Button>
+      <Button href="/blog/">Blog</Button>
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+    padding: 48px 0 64px;
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

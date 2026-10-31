@@ -1,0 +1,61 @@
+---
+import PageHero from '../components/molecules/PageHero/PageHero.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { createPageSeo } from '../lib/seo';
+import content from '../content/pages/in-the-media.json';
+
+const page = createPageSeo({
+  id: content.id,
+  path: content.path,
+  title: content.title,
+  description: content.description,
+  ogTitle: content.heroTitle,
+});
+---
+
+<SiteLayout page={page}>
+  <PageHero title={content.heroTitle} />
+  <div class="page-wrap media-page">
+    <Text class="muted">{content.intro}</Text>
+    <ul class="media-list">
+      {content.features.map((feature) => (
+        <li>
+          <a href={feature.href}>{feature.title}</a>
+        </li>
+      ))}
+    </ul>
+    <FairCountdown />
+  </div>
+</SiteLayout>
+
+<style>
+  .media-page {
+    display: grid;
+    gap: 24px;
+    padding: 24px 0 64px;
+  }
+
+  .media-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .media-list a {
+    display: block;
+    padding: 18px 20px;
+    border-radius: 16px;
+    background: var(--color-brand-ice);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .media-list a:hover,
+  .media-list a:focus-visible {
+    background: var(--color-brand-cyan);
+  }
+</style>

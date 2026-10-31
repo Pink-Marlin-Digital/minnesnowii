@@ -1,0 +1,87 @@
+---
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit';
+  title?: string;
+  id?: string;
+}
+
+const {
+  href,
+  type = 'button',
+  title,
+  id,
+} = Astro.props;
+
+let kind: 'link' | 'submit' | 'button' = 'button';
+if (href) kind = 'link';
+else if (type === 'submit') kind = 'submit';
+---
+
+{kind === 'link' && (
+  <a class="btn" href={href} title={title} id={id}>
+    <slot />
+  </a>
+)}
+{kind === 'submit' && (
+  <button class="btn" type="submit" title={title} id={id}>
+    <slot />
+  </button>
+)}
+{kind === 'button' && (
+  <button class="btn" type="button" title={title} id={id}>
+    <slot />
+  </button>
+)}
+
+<style is:global>
+  a.btn,
+  button.btn,
+  input.btn {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 14px 22px !important;
+    border: 0 !important;
+    border-radius: 10px !important;
+    background: #ee292f !important;
+    color: #ffffff !important;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px !important;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  a.btn:hover,
+  a.btn:focus-visible,
+  button.btn:hover,
+  button.btn:focus-visible,
+  input.btn:hover,
+  input.btn:focus-visible {
+    background: #05d9ff !important;
+    color: #111111 !important;
+  }
+
+  a.btn:focus-visible,
+  button.btn:focus-visible,
+  input.btn:focus-visible {
+    outline: 3px solid #111111;
+    outline-offset: 3px;
+  }
+
+  #contact-button a.btn {
+    background: #ee292f !important;
+    box-shadow: none;
+    color: #ffffff !important;
+  }
+
+  #contact-button a.btn:hover,
+  #contact-button a.btn:focus-visible {
+    background: #05d9ff !important;
+    color: #111111 !important;
+  }
+</style>

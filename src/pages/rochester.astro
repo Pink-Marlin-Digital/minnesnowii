@@ -1,0 +1,52 @@
+---
+import PageHero from '../components/molecules/PageHero/PageHero.astro';
+import CtaGroup from '../components/molecules/CtaGroup/CtaGroup.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { createPageSeo } from '../lib/seo';
+import content from '../content/pages/rochester.json';
+import site from '../config/site.json';
+
+const page = createPageSeo({
+  id: content.id,
+  path: content.path,
+  title: content.title,
+  description: content.description,
+  ogTitle: content.heroTitle,
+});
+---
+
+<SiteLayout page={page}>
+  <PageHero title={content.heroTitle} eyebrow={content.eyebrow} />
+  <div class="page-wrap rochester-page">
+    {content.body.map((paragraph) => <Text class="muted">{paragraph}</Text>)}
+    <CtaGroup
+      primaryHref="/contact/"
+      primaryLabel="Book Us"
+      secondaryHref="/where-to-find-minnesnowii/"
+      secondaryLabel="Find Us"
+    />
+    <p class="rochester-phone">
+      Or call <a href={`tel:${site.business.phone.replace(/[^\d+]/g, '')}`}>{site.business.phone}</a>
+    </p>
+    <FairCountdown />
+  </div>
+</SiteLayout>
+
+<style>
+  .rochester-page {
+    display: grid;
+    gap: 18px;
+    padding: 24px 0 64px;
+  }
+
+  .rochester-phone {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .rochester-phone a {
+    color: var(--color-brand-muted);
+  }
+</style>

@@ -1,8 +1,94 @@
 ---
+import googleReviews from '../data/google-reviews.json';
+import site from '../config/site.json';
+import Button from '../components/atoms/Button/Button.astro';
+import Heading from '../components/atoms/Heading/Heading.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import CtaGroup from '../components/molecules/CtaGroup/CtaGroup.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import GoogleReviews from '../components/organisms/GoogleReviews.astro';
+import HomeIntro from '../components/organisms/HomeIntro.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { homePage } from '../lib/pages';
+import { createPageSeo } from '../lib/seo';
+import home from '../content/pages/home.json';
 
-const page = homePage();
+const page = createPageSeo({
+  id: home.id,
+  path: home.path,
+  title: home.title,
+  description: home.description,
+  lcpImage: home.hero.image,
+});
+const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
 ---
 
-<SiteLayout page={page} />
+<SiteLayout page={page}>
+  <HomeIntro>
+    <section class="home-brand">
+      <div class="home-brand-fade">
+        <h2 class="home-brand-headline">{home.brand.headline}</h2>
+        <p class="home-brand-subhead">{home.brand.subhead}</p>
+      </div>
+      <GoogleReviews
+        businessName={googleReviews.businessName}
+        businessUrl={googleReviews.businessUrl}
+        rating={googleReviews.rating}
+        reviewCount={googleReviews.reviewCount}
+        reviews={googleReviews.reviews}
+      />
+      <div class="home-actions-row">
+        {home.actions.map((action) => (
+          <Button href={action.href} title={action.title}>{action.label}</Button>
+        ))}
+      </div>
+    </section>
+  </HomeIntro>
+
+  <section class="home-section page-wrap">
+    <Heading level={2}>{home.about.title}</Heading>
+    {home.about.body.map((paragraph) => <Text class="muted">{paragraph}</Text>)}
+  </section>
+
+  <div class="home-countdown page-wrap">
+    <FairCountdown />
+  </div>
+
+  <section class="home-cta page-wrap">
+    <Heading level={2}>{home.contactCta.title}</Heading>
+    <Text>{home.contactCta.body}</Text>
+    <CtaGroup
+      primaryHref={home.contactCta.buttonHref}
+      primaryLabel={home.contactCta.buttonLabel}
+      secondaryHref={phoneHref}
+      secondaryLabel={`Or call ${site.business.phone}`}
+    />
+  </section>
+</SiteLayout>
+
+<style>
+  .home-actions-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .home-section,
+  .home-cta {
+    display: grid;
+    gap: 14px;
+    padding: 40px 0;
+  }
+
+  .home-countdown {
+    padding: 12px 0 28px;
+  }
+
+  .home-cta {
+    margin-bottom: 48px;
+    padding: 32px;
+    border-radius: 24px;
+    background: var(--color-brand-ice);
+  }
+</style>

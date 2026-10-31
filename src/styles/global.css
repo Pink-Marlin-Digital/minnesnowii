@@ -1,1 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Open+Sans:wght@400;600;700;800&display=swap");
 @import "tailwindcss";
+
+@font-face {
+  font-family: alphakind;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("/wp-content/uploads/useanyfont/2609Alphakind.woff2") format("woff2"),
+    url("/wp-content/uploads/useanyfont/2609Alphakind.woff") format("woff");
+}
+
+@theme {
+  --color-brand-cyan: #05d9ff;
+  --color-brand-cyan-deep: #03d9ff;
+  --color-brand-red: #ee292f;
+  --color-brand-ink: #111111;
+  --color-brand-muted: #037a9e;
+  --color-brand-ice: #e5faff;
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-brand: alphakind, "Abril Fatface", Georgia, serif;
+  --font-display: var(--font-brand);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--color-brand-ink);
+  font-family: var(--font-sans);
+  background: #ffffff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+.site-shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1 0 auto;
+}
+
+.page-wrap {
+  width: min(1120px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-brand-cyan);
+  color: var(--color-brand-ink);
+  cursor: pointer;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--color-brand-red);
+  color: #ffffff;
+}
+
+.back-to-top:focus-visible {
+  outline: 3px solid var(--color-brand-ink);
+  outline-offset: 3px;
+}

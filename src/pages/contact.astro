@@ -1,0 +1,65 @@
+---
+import PageHero from '../components/molecules/PageHero/PageHero.astro';
+import SectionHeader from '../components/molecules/SectionHeader/SectionHeader.astro';
+import ContactForm from '../components/molecules/FormField/ContactForm.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { createPageSeo } from '../lib/seo';
+import content from '../content/pages/contact.json';
+import site from '../config/site.json';
+
+const page = createPageSeo({
+  id: content.id,
+  path: content.path,
+  title: content.title,
+  description: content.description,
+  ogTitle: content.heroTitle,
+});
+const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
+---
+
+<SiteLayout page={page}>
+  <PageHero title={content.heroTitle} />
+  <div class="page-wrap contact-page">
+    {content.sections.map((section) => (
+      <section class="contact-section">
+        <SectionHeader title={section.title} display />
+        {section.body.map((paragraph) => <Text class="muted">{paragraph}</Text>)}
+      </section>
+    ))}
+    <p class="contact-phone">
+      Prefer to talk? <a href={phoneHref}>{site.business.phone}</a>
+    </p>
+    <ContactForm />
+    <div class="contact-countdown">
+      <FairCountdown />
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .contact-page {
+    display: grid;
+    gap: 28px;
+    padding: 24px 0 64px;
+  }
+
+  .contact-section {
+    display: grid;
+    gap: 12px;
+  }
+
+  .contact-phone {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .contact-phone a {
+    color: var(--color-brand-muted);
+  }
+
+  .contact-countdown {
+    margin-top: 16px;
+  }
+</style>

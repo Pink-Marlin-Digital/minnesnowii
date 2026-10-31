@@ -3,6 +3,7 @@
   "title": "Minnesnowii Hawaiian Style Shave Ice - Minnesotas Best Shave ice - Minnesnowii Shave Ice",
   "description": "Minnesnowii is authentic Hawaiian style Shave Ice in Minnesota. Experience the finest flavors and texture that only our shave ice can offer!",
   "baseUrl": "https://minnesnowii.com",
+  "hostedUrl": "https://minnesnowii.netlify.app",
   "brand": {
     "name": "Minnesnowii",
     "slogan": "Minnesota's Premier Shave Ice Company",
@@ -50,10 +51,37 @@
       "icon": "instagram"
     }
   ],
+  "analytics": {
+    "measurementId": ""
+  },
   "seo": {
     "defaultTitle": "Minnesnowii Hawaiian Style Shave Ice",
     "defaultDescription": "Minnesnowii is authentic Hawaiian style Shave Ice in Minnesota. Experience the finest flavors and texture that only our shave ice can offer!",
     "defaultImage": "/wp-content/uploads/2021/07/Artboard-1@2x.png",
     "twitterHandle": "@Minnesnowii"
+  },
+  "navigation": {
+    "primary": [
+      { "href": "/contact/", "label": "Event Catering" },
+      { "href": "/fun-with-shave-ice/", "label": "Fun With Shave Ice" }
+    ],
+    "about": [
+      { "href": "/where-to-find-minnesnowii/", "label": "Where To Find Minnesnowii" },
+      { "href": "/gallery/", "label": "Gallery" },
+      { "href": "/blog/", "label": "Blog" },
+      { "href": "/jobs/", "label": "Jobs" },
+      { "href": "/in-the-media/", "label": "In the News" }
+    ],
+    "footer": [
+      { "href": "/where-to-find-minnesnowii/", "label": "Where To Find Minnesnowii" },
+      { "href": "/contact/", "label": "Event and Party Catering" },
+      { "href": "/fun-with-shave-ice/", "label": "Fun With Shave Ice" },
+      { "href": "/gallery/", "label": "Gallery" },
+      { "href": "/rochester/", "label": "Rochester" },
+      { "href": "/in-the-media/", "label": "In The Media" },
+      { "href": "/blog/", "label": "Blog" },
+      { "href": "/jobs/", "label": "Jobs" },
+      { "href": "/", "label": "Home" }
+    ]
   }
 }

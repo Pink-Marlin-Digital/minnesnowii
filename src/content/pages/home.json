@@ -1,0 +1,44 @@
+{
+  "id": "home",
+  "path": "/",
+  "title": "Minnesnowii Hawaiian Style Shave Ice - Minnesotas Best Shave ice - Minnesnowii Shave Ice",
+  "description": "Minnesnowii is authentic Hawaiian style Shave Ice in Minnesota. Experience the finest flavors and texture that only our shave ice can offer!",
+  "hero": {
+    "kicker": "Parties, events and social gatherings",
+    "title": "What will your guests still be talking about on the drive home?",
+    "lead": "You can fill the room. The harder part is giving people a reason to feel glad they came.",
+    "image": "/wp-content/uploads/2021/06/IMG_8994-683x1024.jpg",
+    "imageAlt": "A family laughing with cups of shave ice in front of the Minnesnowii trailer",
+    "primaryHref": "/contact/",
+    "primaryLabel": "Plan the moment they remember"
+  },
+  "brand": {
+    "headline": "Minnesota's Premier Shave Ice Company",
+    "subhead": "Serving Authentic Hawaiian Style Shave Ice to all of Minnesota!"
+  },
+  "actions": [
+    {
+      "href": "/contact/",
+      "label": "Book Us!",
+      "title": "Event and Party Catering"
+    },
+    {
+      "href": "/where-to-find-minnesnowii/",
+      "label": "Find Us!",
+      "title": "Where To Find Minnesnowii"
+    }
+  ],
+  "about": {
+    "title": "About Minnesnowii",
+    "body": [
+      "In forming our company, we combined our love for Hawaii and Minnesota, creating Minnesnowii Shave Ice. Our pride is serving Authentic Hawaiian Style Shave Ice, just like in paradise.",
+      "The flavors we offer are imported from Hawaii and we use the best commercial block shavers to finely shave the ice. It is so soft that there is never a crunch from the first bite till the last."
+    ]
+  },
+  "contactCta": {
+    "title": "Ready to book?",
+    "body": "Tell us about your party, festival, or corporate event and we will help you plan the moment guests remember.",
+    "buttonLabel": "Contact Us",
+    "buttonHref": "/contact/"
+  }
+}

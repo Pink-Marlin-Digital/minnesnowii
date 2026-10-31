@@ -1,0 +1,455 @@
+---
+import SiteLayout from './SiteLayout.astro';
+import { listPosts } from '../lib/blog';
+import { routablePages } from '../lib/pages';
+
+interface Props {
+  path: '/blog-cards-1/' | '/blog-cards-2/' | '/blog-cards-3/';
+  variant: 1 | 2 | 3;
+  title: string;
+  description: string;
+}
+
+const { path, variant, title, description } = Astro.props;
+const source = routablePages().find((page) => page.path === '/blog/');
+if (!source) throw new Error('Manifest is missing the blog page.');
+const page = {
+  ...source,
+  path,
+  title,
+  description,
+  robots: 'noindex, follow',
+  ogTitle: title,
+  ogDescription: description,
+  jsonLd: [],
+};
+const posts = listPosts();
+const options = [
+  { href: '/blog-cards-1/', label: 'Option 1: Syrup stripe' },
+  { href: '/blog-cards-2/', label: 'Option 2: Fair sticker' },
+  { href: '/blog-cards-3/', label: 'Option 3: Shave cup' },
+];
+const headings = {
+  1: 'Syrup stripe',
+  2: 'Fair sticker',
+  3: 'Shave cup',
+} as const;
+const leads = {
+  1: 'White cards with a bright blue band under every photo.',
+  2: 'A tall photo with the date stuck on like a fair ticket.',
+  3: 'A round photo in a blue ring, beside the story.',
+} as const;
+---
+
+<SiteLayout page={page}>
+  <main id="content" class="card-preview">
+    <nav class="card-options" aria-label="Blog card options">
+      <p>Compare blog cards</p>
+      <ul>
+        {options.map((option) => (
+          <li>
+            <a href={option.href} aria-current={option.href === path ? 'page' : undefined}>{option.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <header class="card-intro">
+      <p class="card-kicker">Option {variant}</p>
+      <h1>{headings[variant]}</h1>
+      <p>{leads[variant]}</p>
+    </header>
+    {variant === 1 && (
+      <ul class="stripe-grid">
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <a class="stripe" href={`/${post.slug}/`} aria-label={post.title}>
+              <span class="stripe-photo">
+                <img src={post.cardImage} alt="" width="640" height="420" />
+              </span>
+              <span class="stripe-band">{post.dateLabel}</span>
+              <span class="stripe-body">
+                <span class="stripe-title">{post.title}</span>
+                <span class="stripe-excerpt">{post.excerpt}</span>
+                <span class="stripe-more">Read this one</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+    {variant === 2 && (
+      <ul class="poster-grid">
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <a class="poster" href={`/${post.slug}/`} aria-label={post.title}>
+              <span class="poster-photo">
+                <img src={post.cardImage} alt="" width="640" height="800" />
+                <span class="poster-date">{post.dateLabel}</span>
+              </span>
+              <span class="poster-title">{post.title}</span>
+              <span class="poster-excerpt">{post.excerpt}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+    {variant === 3 && (
+      <ul class="cup-grid">
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <a class="cup" href={`/${post.slug}/`} aria-label={post.title}>
+              <span class="cup-ring">
+                <img src={post.cardImage} alt="" width="280" height="280" />
+              </span>
+              <span class="cup-copy">
+                <span class="cup-date">{post.dateLabel}</span>
+                <span class="cup-title">{post.title}</span>
+                <span class="cup-excerpt">{post.excerpt}</span>
+                <span class="cup-more">Read more -&gt;</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </main>
+</SiteLayout>
+
+<style>
+  .card-preview {
+    padding: 0 0 72px;
+    background: #ffffff;
+    color: #111111;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .card-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    padding: 14px 24px;
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .card-options p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .card-options ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card-options a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #05d9ff;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .card-options a[aria-current="page"] {
+    background: #ee292f;
+    color: #ffffff;
+  }
+
+  .card-intro {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 36px 24px 8px;
+  }
+
+  .card-kicker {
+    margin: 0 0 8px;
+    color: #0899b8;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .card-intro h1 {
+    margin: 0 0 8px;
+    color: #111111;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .card-intro p {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .stripe-grid,
+  .poster-grid,
+  .cup-grid {
+    display: grid;
+    gap: 22px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 24px 0;
+    list-style: none;
+  }
+
+  .stripe,
+  .poster,
+  .cup {
+    display: flex;
+    box-sizing: border-box;
+    height: 100%;
+    min-width: 0;
+    color: #111111;
+    text-decoration: none;
+  }
+
+  .stripe {
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid #05d9ff;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(0, 60, 80, 0.08);
+  }
+
+  .stripe-photo {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #e5faff;
+  }
+
+  .stripe-photo img,
+  .poster-photo img,
+  .cup-ring img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .stripe-band {
+    display: block;
+    padding: 8px 18px;
+    background: #05d9ff;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .stripe-body,
+  .poster-title,
+  .poster-excerpt,
+  .cup-copy {
+    display: block;
+  }
+
+  .stripe-body {
+    padding: 16px 18px 20px;
+  }
+
+  .stripe-title,
+  .poster-title,
+  .cup-title {
+    display: block;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .stripe-title {
+    font-size: 22px;
+  }
+
+  .stripe-excerpt,
+  .poster-excerpt,
+  .cup-excerpt {
+    display: -webkit-box;
+    margin-top: 8px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    font-size: 15px;
+  }
+
+  .stripe-more {
+    display: inline-block;
+    margin-top: 14px;
+    color: #ee292f;
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .stripe:hover .stripe-photo img,
+  .stripe:focus-visible .stripe-photo img {
+    transform: scale(1.05);
+  }
+
+  .stripe-photo img {
+    transition: transform 0.25s ease;
+  }
+
+  .poster {
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 26px;
+    background: #ffffff;
+    box-shadow: 0 14px 30px rgba(0, 60, 80, 0.12);
+  }
+
+  .poster-photo {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #05d9ff;
+  }
+
+  .poster-date {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    max-width: calc(100% - 32px);
+    padding: 8px 12px;
+    background: #05d9ff;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.2;
+    transform: rotate(-6deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  }
+
+  .poster-title {
+    padding: 16px 18px 0;
+    font-size: 24px;
+  }
+
+  .poster-excerpt {
+    padding: 0 18px 20px;
+  }
+
+  .poster:hover .poster-date,
+  .poster:focus-visible .poster-date {
+    transform: rotate(0deg) scale(1.04);
+  }
+
+  .cup {
+    align-items: stretch;
+    gap: 18px;
+    padding: 16px;
+    border-radius: 28px;
+    background: #e5faff;
+  }
+
+  .cup-ring {
+    display: block;
+    flex: 0 0 auto;
+    width: 132px;
+    height: 132px;
+    padding: 6px;
+    border-radius: 50%;
+    background: #05d9ff;
+  }
+
+  .cup-ring img {
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+  }
+
+  .cup-date {
+    display: block;
+    color: #0899b8;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .cup-title {
+    margin-top: 4px;
+    font-size: 22px;
+  }
+
+  .cup-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .cup-more {
+    align-self: flex-end;
+    margin-top: auto;
+    padding-top: 14px;
+    color: #037a9e;
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .cup:hover .cup-more,
+  .cup:focus-visible .cup-more {
+    color: #ee292f;
+  }
+
+  .cup:hover .cup-ring,
+  .cup:focus-visible .cup-ring {
+    background: #ee292f;
+  }
+
+  .stripe:focus-visible,
+  .poster:focus-visible,
+  .cup:focus-visible {
+    outline: 3px solid #ee292f;
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 700px) {
+    .stripe-grid,
+    .poster-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .cup-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .stripe-grid,
+    .poster-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 699px) {
+    .card-intro h1 {
+      font-size: 32px;
+    }
+
+    .cup {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

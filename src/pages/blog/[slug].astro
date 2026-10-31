@@ -1,0 +1,142 @@
+---
+import FairCountdown from '../../components/FairCountdown.astro';
+import PageHero from '../../components/molecules/PageHero/PageHero.astro';
+import MarkdownBody from '../../components/organisms/MarkdownBody/MarkdownBody';
+import '../../components/organisms/MarkdownBody/MarkdownBody.css';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getPostEntry, listPostSlugs, toSummary } from '../../lib/blog';
+import { createPageSeo } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const slugs = await listPostSlugs();
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error('Missing blog slug');
+
+const entry = await getPostEntry(slug);
+if (!entry) throw new Error(`Unknown blog post: ${slug}`);
+
+const post = toSummary(entry);
+const page = createPageSeo({
+  id: `blog-${post.slug}`,
+  path: `/blog/${post.slug}/`,
+  title: `${post.title} - Minnesnowii Shave Ice`,
+  description: post.description,
+  ogTitle: post.title,
+  ogDescription: post.description,
+  ogImage: post.hero || post.cardImage,
+  ogType: 'article',
+});
+
+function normalizeMarkdown(raw: string): string {
+  return raw.replace(
+    /^@video\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^\n]+)$/gm,
+    (_match, title: string, src: string, width: string, height: string) => (
+      `\n\n<iframe title="${title.trim()}" src="${src.trim()}" width="${width.trim()}" height="${height.trim()}" loading="lazy" allowfullscreen></iframe>\n\n`
+    ),
+  );
+}
+
+const markdown = normalizeMarkdown(entry.body);
+---
+
+<SiteLayout page={page}>
+  <article class="blog-post">
+    {post.hero ? (
+      <PageHero title={post.title} image={post.hero} imageAlt={post.title} />
+    ) : (
+      <PageHero title={post.title} />
+    )}
+    <div class="blog-post-layout page-wrap">
+      <div class="blog-post-main">
+        <div class="blog-back-wrap">
+          <a class="blog-back" href="/blog/">← Back to Blog</a>
+        </div>
+        <p class="blog-post-meta">
+          <time datetime={post.date}>{post.dateLabel}</time>
+          {post.category && <span> · {post.category}</span>}
+        </p>
+        <MarkdownBody client:visible markdown={markdown} />
+        {post.tags.length > 0 && (
+          <ul class="blog-post-tags" aria-label="Tags">
+            {post.tags.map((tag) => (
+              <li>
+                <a href="/blog/">{tag.name}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <aside class="blog-post-aside">
+        <FairCountdown />
+      </aside>
+    </div>
+  </article>
+</SiteLayout>
+
+<style>
+  .blog-back-wrap {
+    margin-bottom: 16px;
+  }
+
+  .blog-back {
+    display: inline-block;
+    color: var(--color-brand-muted);
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .blog-back:hover,
+  .blog-back:focus-visible {
+    color: var(--color-brand-red);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .blog-post-layout {
+    display: grid;
+    gap: 32px;
+    padding: 28px 0 64px;
+  }
+
+  .blog-post-meta {
+    margin: 0 0 20px;
+    color: var(--color-brand-muted);
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .blog-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .blog-post-tags a {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--color-brand-ice);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .blog-post-tags a:hover,
+  .blog-post-tags a:focus-visible {
+    background: var(--color-brand-cyan);
+  }
+
+  @media (min-width: 960px) {
+    .blog-post-layout {
+      grid-template-columns: minmax(0, 1fr) 280px;
+      align-items: start;
+    }
+  }
+</style>

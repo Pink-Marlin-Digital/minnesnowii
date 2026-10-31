@@ -1,0 +1,42 @@
+{
+  "id": "in-the-media",
+  "path": "/in-the-media/",
+  "title": "In The News - Minnesnowii Shave Ice write-ups and reviews",
+  "description": "Minnesnowii in the news around Minneapolis, MN and the southern suburbs. Features, reviews, and media mentions.",
+  "heroTitle": "In The News",
+  "intro": "When we get a feature in the media, we want to share it. Here are some outlets that have posted about us.",
+  "features": [
+    {
+      "title": "Wall Street Journal",
+      "href": "/blog/wall-street-journal/"
+    },
+    {
+      "title": "Give Me The Mike and KSTP’s Twin Cities Live at The Minnesota State Fair!",
+      "href": "/blog/give-me-the-mike-and-kstps-twin-cities-live-at-the-minnesota-state-fair/"
+    },
+    {
+      "title": "Shout out from EATER",
+      "href": "/blog/shout-out-from-eater/"
+    },
+    {
+      "title": "Jason Derusha from WCCO Stops by to make some shave ice!",
+      "href": "/blog/jason-derusha-from-wcco-stops-by-to-make-some-shave-ice/"
+    },
+    {
+      "title": "Mpls St Paul Business Magazine",
+      "href": "/blog/mpls-st-paul-business-magazine/"
+    },
+    {
+      "title": "Voted Best Minnesota State Fair Food Vendor from the Star Tribune!",
+      "href": "/blog/voted-best-minnesota-state-fair-food-vendor-from-the-star-tribune/"
+    },
+    {
+      "title": "Kick Off To Summer at the Minnesota State Fair",
+      "href": "/blog/kick-off-to-summer-at-the-fair/"
+    },
+    {
+      "title": "Young entrepreneur scores big with state fair booth",
+      "href": "/blog/young-entrepreneur-scores-big-with-state-fair-booth/"
+    }
+  ]
+}

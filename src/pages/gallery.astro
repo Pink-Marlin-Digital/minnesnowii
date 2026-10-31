@@ -1,0 +1,34 @@
+---
+import PageHero from '../components/molecules/PageHero/PageHero.astro';
+import Text from '../components/atoms/Text/Text.astro';
+import PhotoGallery from '../components/organisms/PhotoGallery/PhotoGallery.astro';
+import FairCountdown from '../components/FairCountdown.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { createPageSeo } from '../lib/seo';
+import content from '../content/pages/gallery.json';
+
+const page = createPageSeo({
+  id: content.id,
+  path: content.path,
+  title: content.title,
+  description: content.description,
+  ogTitle: content.heroTitle,
+});
+---
+
+<SiteLayout page={page}>
+  <PageHero title={content.heroTitle} />
+  <div class="page-wrap gallery-page">
+    <Text class="muted">{content.intro}</Text>
+    <PhotoGallery />
+    <FairCountdown />
+  </div>
+</SiteLayout>
+
+<style>
+  .gallery-page {
+    display: grid;
+    gap: 24px;
+    padding: 24px 0 64px;
+  }
+</style>

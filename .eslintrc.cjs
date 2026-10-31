@@ -81,6 +81,13 @@ module.exports = {
         'react/jsx-filename-extension': 'off',
         'react/no-unknown-property': 'off',
         'react/jsx-props-no-spreading': 'off',
+        'react/style-prop-object': 'off',
+        'react/self-closing-comp': 'off',
+        'react/jsx-no-undef': 'off',
+        'react/jsx-no-useless-fragment': 'off',
+        'react/no-invalid-html-attribute': 'off',
+        'jsx-a11y/control-has-associated-label': 'off',
+        'jsx-a11y/label-has-associated-control': 'off',
         // Disable deprecated rules that don't exist in @typescript-eslint v8
         '@typescript-eslint/lines-between-class-members': 'off',
         '@typescript-eslint/no-throw-literal': 'off',

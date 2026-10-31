@@ -1,0 +1,29 @@
+{
+  "businessName": "Minnesnowii Shave Ice",
+  "businessUrl": "https://maps.google.com/?cid=12753525747763064074",
+  "rating": 5,
+  "reviewCount": 20,
+  "reviews": [
+    {
+      "name": "Peter Shu",
+      "detail": "Local Guide · 49 reviews · 201 photos",
+      "rating": 5,
+      "when": "5 months ago",
+      "text": "I had their Hawaiian Shaved Ice at the MN State Fair Preview Weekend. It was unlike any snow cone I've ever had. I had a Passion Fruit and Guava, with Cream drizzled on top. Yep, best snow cone ever. Hands down. I hear they'll be at US Bank Stadium as well, and they'll serve them spiked there! Let's go!"
+    },
+    {
+      "name": "Tint & Wrap MN",
+      "detail": "2 reviews",
+      "rating": 5,
+      "when": "7 months ago",
+      "text": "My fav fair food!"
+    },
+    {
+      "name": "Hayden J",
+      "detail": "2 reviews",
+      "rating": 5,
+      "when": "4 years ago",
+      "text": "Love this place! A must stop every time you see them in the summer! I love their staff! Best customer service to match the amazing cup of shave ice!"
+    }
+  ]
+}
