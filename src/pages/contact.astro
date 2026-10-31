@@ -1,7 +1,7 @@
 ---
 import PageHero from '../components/molecules/PageHero/PageHero.astro';
 import SectionHeader from '../components/molecules/SectionHeader/SectionHeader.astro';
-import ContactForm from '../components/molecules/FormField/ContactForm.astro';
+import BookingForm from '../components/molecules/FormField/BookingForm.astro';
 import Text from '../components/atoms/Text/Text.astro';
 import FairCountdown from '../components/FairCountdown.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
@@ -24,14 +24,17 @@ const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
   <div class="page-wrap contact-page">
     {content.sections.map((section) => (
       <section class="contact-section">
-        <SectionHeader title={section.title} display />
-        {section.body.map((paragraph) => <Text class="muted">{paragraph}</Text>)}
+        <SectionHeader title={section.title} display align="center" />
+        {section.body.map((paragraph) => <Text class="muted center">{paragraph}</Text>)}
       </section>
     ))}
     <p class="contact-phone">
       Prefer to talk? <a href={phoneHref}>{site.business.phone}</a>
     </p>
-    <ContactForm />
+    <section class="booking-section" aria-labelledby="booking-header">
+      <h2 id="booking-header" class="booking-title">Book an Event</h2>
+      <BookingForm />
+    </section>
     <div class="contact-countdown">
       <FairCountdown />
     </div>
@@ -52,6 +55,7 @@ const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
 
   .contact-phone {
     margin: 0;
+    text-align: center;
     font-weight: 700;
   }
 
@@ -59,7 +63,27 @@ const phoneHref = `tel:${site.business.phone.replace(/[^\d+]/g, '')}`;
     color: var(--color-brand-muted);
   }
 
+  .booking-section {
+    display: grid;
+    gap: 20px;
+    padding: 8px 0 16px;
+  }
+
+  .booking-title {
+    margin: 0;
+    color: #03d9ff;
+    font-family: var(--font-brand);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 400;
+    text-align: center;
+    text-shadow: 0.15rem 0.15rem 0.25rem #333;
+  }
+
   .contact-countdown {
     margin-top: 16px;
+  }
+
+  :global(.text.center) {
+    text-align: center;
   }
 </style>

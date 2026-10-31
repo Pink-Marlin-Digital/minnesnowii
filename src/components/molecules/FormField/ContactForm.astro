@@ -25,9 +25,9 @@ const {
   <input type="hidden" name="form-name" value={formName} />
   <input type="hidden" name="subject" value={subject} />
   <input class="netlify-honeypot" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-  <Input id="contact-name" name="name" label="Name" required autocomplete="name" />
-  <Input id="contact-email" name="email" type="email" label="Email" required autocomplete="email" />
-  <Textarea id="contact-message" name="message" label="Message" required />
+  <Input id="contact-name" name="name" label="Name" required placeholder="Name" autocomplete="name" />
+  <Input id="contact-email" name="email" type="email" label="Email" required placeholder="Email" autocomplete="email" />
+  <Textarea id="contact-message" name="message" label="Comments" required placeholder="Message" />
   <Button type="submit">Submit</Button>
 </form>
 

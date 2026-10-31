@@ -1,0 +1,193 @@
+---
+import Button from '../../atoms/Button/Button.astro';
+import Input from '../../atoms/Input/Input.astro';
+
+interface Props {
+  formName?: string;
+  subject?: string;
+}
+
+const {
+  formName = 'minnesnowii-gform_2',
+  subject = 'New event booking',
+} = Astro.props;
+
+const eventTypes = ['Birthday', 'Wedding', 'Grad Party', 'Company Picnic', 'Other'];
+---
+
+<form
+  class="booking-form"
+  name={formName}
+  method="POST"
+  action="/thank-you/"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value={formName} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="country" value="United States" />
+  <input class="netlify-honeypot" name="bot-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <fieldset class="name-fieldset">
+    <legend class="field-label">Name<span aria-hidden="true"> *</span></legend>
+    <div class="name-grid">
+      <label class="field" for="booking-first-name">
+        <span class="sublabel">First</span>
+        <input id="booking-first-name" name="first-name" type="text" class="field-control" required autocomplete="given-name" aria-required="true" />
+      </label>
+      <label class="field" for="booking-last-name">
+        <span class="sublabel">Last</span>
+        <input id="booking-last-name" name="last-name" type="text" class="field-control" required autocomplete="family-name" aria-required="true" />
+      </label>
+    </div>
+  </fieldset>
+
+  <Input id="booking-email" name="email" type="email" label="Email" required autocomplete="email" />
+  <Input id="booking-phone" name="phone" type="tel" label="Phone" autocomplete="tel" />
+  <Input
+    id="booking-event-date"
+    name="event-date"
+    type="text"
+    label="Date of event"
+    required
+    placeholder="mm/dd/yyyy"
+    autocomplete="off"
+  />
+
+  <label class="field" for="booking-event-type">
+    <span class="field-label">Event Type<span aria-hidden="true"> *</span></span>
+    <select id="booking-event-type" name="event-type" class="field-control" required aria-required="true">
+      {eventTypes.map((type) => (
+        <option value={type}>{type}</option>
+      ))}
+    </select>
+  </label>
+
+  <fieldset class="address-fieldset">
+    <legend class="field-label">Address<span aria-hidden="true"> *</span></legend>
+    <label class="field" for="booking-street">
+      <span class="sublabel">Street Address</span>
+      <input id="booking-street" name="street-address" type="text" class="field-control" required autocomplete="street-address" aria-required="true" />
+    </label>
+    <div class="address-grid">
+      <label class="field" for="booking-city">
+        <span class="sublabel">City</span>
+        <input id="booking-city" name="city" type="text" class="field-control" required autocomplete="address-level2" aria-required="true" />
+      </label>
+      <label class="field" for="booking-state">
+        <span class="sublabel">State / Province / Region</span>
+        <input id="booking-state" name="state" type="text" class="field-control" required autocomplete="address-level1" aria-required="true" />
+      </label>
+      <label class="field" for="booking-zip">
+        <span class="sublabel">ZIP / Postal Code</span>
+        <input id="booking-zip" name="zip-code" type="text" class="field-control" required autocomplete="postal-code" aria-required="true" />
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset class="setting-fieldset">
+    <legend class="field-label">Setting<span aria-hidden="true"> *</span></legend>
+    <div class="setting-options">
+      <label class="setting-option" for="setting-residential">
+        <input id="setting-residential" type="radio" name="setting" value="Residential" required />
+        Residential
+      </label>
+      <label class="setting-option" for="setting-commercial">
+        <input id="setting-commercial" type="radio" name="setting" value="Commercial" required />
+        Commercial
+      </label>
+    </div>
+  </fieldset>
+
+  <Input id="booking-cups" name="cups" label="Approximate number of cups needed" required />
+  <Input id="booking-duration" name="duration-hours" label="Duration of event (hours)" required />
+
+  <Button type="submit">Submit</Button>
+</form>
+
+<style>
+  .booking-form {
+    display: grid;
+    gap: 16px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .netlify-honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+
+  .field-label {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .sublabel {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .field-control {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #c9c9c9;
+    border-radius: 10px;
+    font: inherit;
+    background: #fff;
+  }
+
+  .field-control:focus-visible {
+    outline: 3px solid var(--color-brand-cyan);
+    outline-offset: 2px;
+  }
+
+  .name-fieldset,
+  .address-fieldset,
+  .setting-fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .name-grid,
+  .address-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .setting-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+
+  .setting-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+
+  @media (min-width: 700px) {
+    .name-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .address-grid {
+      grid-template-columns: 1.2fr 1fr 0.8fr;
+    }
+  }
+</style>

@@ -1,0 +1,478 @@
+---
+import Button from '../atoms/Button/Button.astro';
+import SocialIcon from '../atoms/SocialIcon/SocialIcon.astro';
+import FairCountdown from '../FairCountdown.astro';
+import type { BlogPostSummary } from '../../lib/blog';
+import site from '../../config/site.json';
+import home from '../../content/pages/home.json';
+
+interface Props {
+  posts: BlogPostSummary[];
+}
+
+const { posts } = Astro.props;
+const previewPosts = home.blogPreview.slugs
+  .map((slug) => posts.find((post) => post.slug === slug))
+  .filter((post): post is BlogPostSummary => Boolean(post));
+---
+
+<section class="home-intro page-wrap" aria-labelledby="home-intro-title">
+  <h2 id="home-intro-title" class="section-display">{home.intro.title}</h2>
+  <p class="home-intro-body" set:html={home.intro.bodyHtml} />
+  <ul class="home-intro-gallery">
+    {home.intro.gallery.map((image) => (
+      <li>
+        <img src={image.src} alt={image.alt} width="300" height="300" loading="lazy" />
+      </li>
+    ))}
+  </ul>
+  <div class="home-intro-split">
+    <img
+      class="home-intro-side"
+      src={home.intro.sideImage.src}
+      alt={home.intro.sideImage.alt}
+      width="270"
+      height="300"
+      loading="lazy"
+    />
+    <div class="home-countdown-wrap">
+      <FairCountdown />
+    </div>
+  </div>
+</section>
+
+<section class="home-catering page-wrap">
+  <div class="home-catering-media">
+    <img
+      src={home.intro.cateringPhoto.src}
+      alt={home.intro.cateringPhoto.alt}
+      width="300"
+      height="300"
+      loading="lazy"
+    />
+    <blockquote class="home-testimonial">
+      <p>“{home.intro.testimonial.quote}”</p>
+      <footer>{home.intro.testimonial.attribution}</footer>
+    </blockquote>
+  </div>
+  <div class="home-catering-copy">
+    <h2 class="section-display">{home.catering.title}</h2>
+    <p>{home.catering.body}</p>
+    <Button href={home.catering.buttonHref} title={home.catering.title}>{home.catering.buttonLabel}</Button>
+  </div>
+</section>
+
+<section
+  class="home-features"
+  style={`background-image: url('${home.features.backgroundImage}')`}
+  aria-labelledby="home-features-title"
+>
+  <div class="home-features-panel">
+    <h2 id="home-features-title" class="section-display">{home.features.title}</h2>
+    {home.features.points.map((point) => (
+      <p><strong>{point}</strong></p>
+    ))}
+  </div>
+</section>
+
+<section class="home-blog page-wrap" aria-labelledby="home-blog-title">
+  <h2 id="home-blog-title" class="section-title">{home.blogPreview.title}</h2>
+  <ul class="home-blog-grid">
+    {previewPosts.map((post) => (
+      <li>
+        <a class="home-blog-card" href={`/blog/${post.slug}/`}>
+          <img src={post.cardImage} alt={post.cardAlt} width="400" height="300" loading="lazy" />
+          <span>{post.title}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<section class="home-finding" aria-labelledby="home-finding-title">
+  <div
+    class="home-finding-photo"
+    style={`background-image: url('${home.finding.backgroundImage}')`}
+    role="img"
+    aria-label="Minnesnowii shave ice cone"
+  ></div>
+  <div class="home-finding-copy">
+    <h2 id="home-finding-title" class="section-display">{home.finding.title}</h2>
+    <p class="home-finding-lead">{home.finding.lead}</p>
+    <div class="home-finding-social">
+      {site.social.map((item) => (
+        <a
+          class="home-finding-social-link"
+          href={item.url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={item.platform.charAt(0).toUpperCase() + item.platform.slice(1)}
+        >
+          <SocialIcon platform={item.icon || item.platform} />
+        </a>
+      ))}
+    </div>
+    {home.finding.bodyHtml.map((paragraph) => (
+      <p class="home-finding-body" set:html={paragraph} />
+    ))}
+  </div>
+</section>
+
+<section class="home-apparel page-wrap" aria-labelledby="home-apparel-title">
+  <h2 id="home-apparel-title" class="section-display">{home.apparel.title}</h2>
+  <div class="home-apparel-rule" aria-hidden="true"></div>
+  <p class="home-apparel-body" set:html={home.apparel.bodyHtml} />
+  <ul class="home-apparel-grid">
+    {home.apparel.images.map((image) => (
+      <li>
+        <a href={home.apparel.storeUrl} target="_blank" rel="noreferrer">
+          <img src={image.src} alt={image.alt} width="400" height="500" loading="lazy" />
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<section class="home-about page-wrap" aria-labelledby="home-about-title">
+  <div class="home-about-quote">
+    <img src={home.about.image.src} alt={home.about.image.alt} width="208" height="300" loading="lazy" />
+    <blockquote>
+      <p>“{home.about.quote}”</p>
+      <footer>{home.about.quoteAttribution}</footer>
+    </blockquote>
+  </div>
+  <div class="home-about-copy">
+    <h2 id="home-about-title" class="section-display">{home.about.title}</h2>
+    {home.about.body.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-display {
+    margin: 0 0 16px;
+    color: #03d9ff;
+    font-family: var(--font-brand);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.15;
+    text-align: center;
+    text-shadow: 0.15rem 0.15rem 0.25rem #333;
+  }
+
+  .section-title {
+    margin: 0 0 24px;
+    color: var(--color-brand-ink);
+    font-family: var(--font-brand);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .home-intro {
+    display: grid;
+    gap: 20px;
+    padding: 28px 0 40px;
+  }
+
+  .home-intro-body {
+    margin: 0 auto;
+    max-width: 52rem;
+    text-align: center;
+    line-height: 1.65;
+  }
+
+  .home-intro-body :global(a) {
+    color: var(--color-brand-muted);
+    font-weight: 700;
+  }
+
+  .home-intro-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-intro-gallery img,
+  .home-intro-side,
+  .home-catering-media img,
+  .home-blog-card img,
+  .home-apparel-grid img,
+  .home-about-quote img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0.15rem 0.15rem 0.25rem #999;
+  }
+
+  .home-intro-split {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .home-countdown-wrap {
+    min-width: 0;
+  }
+
+  .home-catering {
+    display: grid;
+    gap: 28px;
+    padding: 24px 0 48px;
+    align-items: center;
+  }
+
+  .home-catering-media {
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .home-testimonial {
+    margin: 0;
+    max-width: 400px;
+    padding-left: 14px;
+    border-left: 5px solid #03d9ff;
+  }
+
+  .home-testimonial p {
+    margin: 0 0 8px;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .home-testimonial footer {
+    text-align: right;
+    font-weight: 700;
+  }
+
+  .home-catering-copy {
+    display: grid;
+    gap: 14px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .home-catering-copy p {
+    margin: 0;
+    max-width: 34rem;
+    line-height: 1.6;
+  }
+
+  .home-features {
+    display: grid;
+    place-items: center;
+    padding: 48px 24px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .home-features-panel {
+    width: min(820px, 100%);
+    padding: 24px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.72);
+    text-align: center;
+  }
+
+  .home-features-panel p {
+    margin: 0 0 10px;
+    line-height: 1.5;
+  }
+
+  .home-blog {
+    padding: 40px 0;
+  }
+
+  .home-blog-grid {
+    display: grid;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-blog-card {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 1rem;
+    background: rgba(3, 217, 255, 0.66);
+    border: 1px solid rgba(3, 217, 255, 0.66);
+    box-shadow: 0.15rem 0.15rem 0.25rem #33333333;
+    color: var(--color-brand-ink);
+    text-decoration: none;
+  }
+
+  .home-blog-card span {
+    font-family: var(--font-brand);
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .home-finding {
+    display: grid;
+    min-height: 420px;
+  }
+
+  .home-finding-photo {
+    min-height: 240px;
+    background-position: left center;
+    background-size: cover;
+  }
+
+  .home-finding-copy {
+    display: grid;
+    gap: 14px;
+    padding: 36px 24px 48px;
+    background: linear-gradient(130deg, rgba(244, 231, 129, 1) 0%, rgba(244, 231, 129, 1) 20%, rgba(255, 255, 255, 1) 75%);
+  }
+
+  .home-finding-lead,
+  .home-finding-body {
+    margin: 0;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .home-finding-body :global(a) {
+    color: #03d9ff;
+    font-weight: 700;
+  }
+
+  .home-finding-social {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .home-finding-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: #03d9ff;
+    color: #0a0a0a;
+    box-shadow: 0.15rem 0.15rem 0.25rem #333;
+    text-decoration: none;
+  }
+
+  .home-apparel {
+    display: grid;
+    gap: 16px;
+    padding: 48px 0;
+    justify-items: center;
+  }
+
+  .home-apparel-rule {
+    width: min(120px, 30%);
+    height: 2px;
+    background: #03d9ff;
+  }
+
+  .home-apparel-body {
+    margin: 0;
+    text-align: center;
+  }
+
+  .home-apparel-body :global(a) {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .home-apparel-grid {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-about {
+    display: grid;
+    gap: 28px;
+    padding: 24px 0 64px;
+  }
+
+  .home-about-quote {
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .home-about-quote blockquote {
+    margin: 0;
+    max-width: 28rem;
+  }
+
+  .home-about-quote p {
+    margin: 0 0 8px;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .home-about-quote footer {
+    font-weight: 700;
+  }
+
+  .home-about-copy {
+    display: grid;
+    gap: 12px;
+  }
+
+  .home-about-copy p {
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  @media (min-width: 800px) {
+    .home-intro-split {
+      grid-template-columns: 0.7fr 1.3fr;
+    }
+
+    .home-catering {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .home-blog-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-finding {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .home-finding-photo {
+      min-height: 100%;
+    }
+
+    .home-apparel-grid {
+      grid-template-columns: repeat(2, minmax(0, 280px));
+      justify-content: center;
+    }
+
+    .home-about {
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 699px) {
+    .home-intro-gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .home-finding-photo {
+      display: none;
+    }
+  }
+</style>

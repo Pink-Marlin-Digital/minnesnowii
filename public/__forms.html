@@ -9,18 +9,19 @@
       <input type="hidden" name="form-name" value="minnesnowii-gform_1" />
       <input type="hidden" name="subject" data-remove-prefix value="New website message" />
       <input name="bot-field" />
-      <label>Name <input type="text" name="name" /></label>
-      <label>Email <input type="email" name="email" /></label>
-      <label>Message <textarea name="message"></textarea></label>
+      <label>Name <input type="text" name="name" placeholder="Name" /></label>
+      <label>Email <input type="email" name="email" placeholder="Email" /></label>
+      <label>Comments <textarea name="message" placeholder="Message"></textarea></label>
     </form>
     <form name="minnesnowii-gform_2" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="minnesnowii-gform_2" />
       <input type="hidden" name="subject" data-remove-prefix value="New event booking" />
       <input name="bot-field" />
-      <label>Name <input type="text" name="name" /></label>
+      <label>First name <input type="text" name="first-name" /></label>
+      <label>Last name <input type="text" name="last-name" /></label>
       <label>Email <input type="email" name="email" /></label>
       <label>Phone <input type="tel" name="phone" /></label>
-      <label>Date of event <input type="text" name="event-date" /></label>
+      <label>Date of event <input type="text" name="event-date" placeholder="mm/dd/yyyy" /></label>
       <label>Event type</label>
       <select name="event-type">
         <option value="Birthday">Birthday</option>

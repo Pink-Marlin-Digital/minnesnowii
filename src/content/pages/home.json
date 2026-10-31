@@ -14,7 +14,9 @@
   },
   "brand": {
     "headline": "Minnesota's Premier Shave Ice Company",
-    "subhead": "Serving Authentic Hawaiian Style Shave Ice to all of Minnesota!"
+    "subhead": "Serving Authentic Hawaiian Style Shave Ice to all of Minnesota!",
+    "logo": "/wp-content/uploads/2021/07/Artboard-1.png",
+    "logoAlt": "Minnesnowii Hawaiian Shave Ice"
   },
   "actions": [
     {
@@ -28,17 +30,97 @@
       "title": "Where To Find Minnesnowii"
     }
   ],
-  "about": {
-    "title": "About Minnesnowii",
-    "body": [
-      "In forming our company, we combined our love for Hawaii and Minnesota, creating Minnesnowii Shave Ice. Our pride is serving Authentic Hawaiian Style Shave Ice, just like in paradise.",
-      "The flavors we offer are imported from Hawaii and we use the best commercial block shavers to finely shave the ice. It is so soft that there is never a crunch from the first bite till the last."
-    ]
+  "intro": {
+    "title": "Minnesnowii Shave Ice",
+    "bodyHtml": "How Minnesnowii was formed, we combined our love for Hawaii and Minnesota and created Minnesnowii Shave Ice. We serve <strong>Authentic Hawaiian Style Shave Ice</strong> just like in Hawaii. We use flavors imported from Hawaii and commercial block shavers to finely shave the ice so soft that there is <strong>never a crunch</strong> from the first bite till the last. It's very light, fluffy, and flavorful! Don't mistake shave ice with a sno-cone. There is a huge difference in texture. Please, feel free to follow us as we will be serving numerous county fairs and festivals this summer including the most notable: <a href=\"https://www.mnstatefair.org/\">Minnesota State Fair</a>: across from the GIANT SLIDE!",
+    "gallery": [
+      {
+        "src": "/wp-content/uploads/2021/06/square-8-300x300.jpg",
+        "alt": "Minnesnowii shave ice cup"
+      },
+      {
+        "src": "/wp-content/uploads/2021/06/IMG_7304-300x300.jpg",
+        "alt": "Beat the heat with a divine dish"
+      },
+      {
+        "src": "/wp-content/uploads/2021/06/IMG_3171-150x150.jpg",
+        "alt": "Double rainbow in St. Cloud, MN"
+      }
+    ],
+    "sideImage": {
+      "src": "/wp-content/uploads/2021/06/IMG_8637-270x300.jpg",
+      "alt": "City Pages cover featuring Minnesnowii"
+    },
+    "testimonial": {
+      "quote": "My favorite part of summer!",
+      "attribution": "Jeff Rasmussen"
+    },
+    "cateringPhoto": {
+      "src": "/wp-content/uploads/2018/08/FullSizeRender-1-300x300.jpeg",
+      "alt": "Fun at Valleyfair with Minnesnowii"
+    }
   },
-  "contactCta": {
-    "title": "Ready to book?",
-    "body": "Tell us about your party, festival, or corporate event and we will help you plan the moment guests remember.",
+  "catering": {
+    "title": "Event and Party Catering",
+    "body": "Event and Party Catering with Minnesnowii Shave Ice will enhance any gathering. Public or private events, functions, and festivals. When you book with Minnesnowii, you're sure to put a smile on your guest's faces.",
     "buttonLabel": "Contact Us",
     "buttonHref": "/contact/"
+  },
+  "features": {
+    "title": "We serve Authentic Hawaiian Style Shave Ice just like in Hawaii.",
+    "backgroundImage": "/wp-content/uploads/2018/08/IMG_0787.jpg",
+    "points": [
+      "We use flavors imported from Hawaii and commercial block shavers to finely shave the ice.",
+      "It's so soft that there is never a crunch from the first bite till the last. It's very light, fluffy, and flavorful!"
+    ]
+  },
+  "blogPreview": {
+    "title": "BLOG",
+    "slugs": [
+      "wall-street-journal",
+      "why-we-call-it-shave-ice-and-not-shaved-ice",
+      "give-me-the-mike-and-kstps-twin-cities-live-at-the-minnesota-state-fair"
+    ]
+  },
+  "finding": {
+    "title": "Finding Minnesnowii",
+    "lead": "To get the quickest updates of where we will be this summer follow us on social media!",
+    "backgroundImage": "/wp-content/uploads/2021/06/IMG_5118.jpg",
+    "bodyHtml": [
+      "You can also <a href=\"/newsletter/\">join our mailing list</a> and get the latest updates delivered to your inbox.",
+      "We will be serving <strong>Authentic Hawaiian Style Shave Ice</strong> at many events throughout the summer including <strong><a href=\"https://www.mnstatefair.org/\"><em>The Great Minnesota Get Together: The Minnesota State Fair</em></a></strong> located across from the Giant Slide!",
+      "We can also come to you! If you would like to book our cart for your event head over to <a href=\"/contact/\">the booking page</a> and send us a message."
+    ]
+  },
+  "apparel": {
+    "title": "Minnesnowii Apparel",
+    "bodyHtml": "Check out the <a href=\"https://lovethefair.com/collections/minnesnowii\">Love The Fair Store</a> for more styles",
+    "storeUrl": "https://lovethefair.com/collections/minnesnowii",
+    "images": [
+      {
+        "src": "/wp-content/uploads/2021/07/fullSizeKids_400.jpg",
+        "alt": "Hawaiian Shave Ice Plymouth, MN"
+      },
+      {
+        "src": "/wp-content/uploads/2021/07/girl_snowii.jpg",
+        "alt": "Party Catering Minneapolis, MN"
+      }
+    ]
+  },
+  "about": {
+    "title": "About Minnesnowii",
+    "quote": "I was like; Bro, I didn't come all the way to Hawaii for a snow cone. . . It was love at first bite!",
+    "quoteAttribution": "Jason Giandalia",
+    "image": {
+      "src": "/wp-content/uploads/2021/06/IMG_7778-208x300.jpg",
+      "alt": "Serving mangonada"
+    },
+    "body": [
+      "Minnesnowii was created by Me, Jason Giandalia.",
+      "I was on a trip to Oahu and a friend invited me to get some shave ice. Honestly, I was like \"Bro, I didn't come all the way to Hawaii for a snow cone.\" He was like: \"Trust me, it's different!\" I trusted him and I am glad I did! I waited over an hour in line for my first cup in 85-degree weather.",
+      "I know this will sound cliche, but it was love at first bite! I asked my friends if we have anything like this back home and they all said no.",
+      "I searched everywhere for that style of ice I had in Hawaii back home and was disappointed every single time. People were serving snow cones calling it shave ice. I got upset. At that point, I got passionate and obsessed about sharing a little piece of my Hawaiian experience with our community here in Minnesota.",
+      "Since then, I have made it my mission to bring the finest shave ice with the highest quality of ingredients all over our community here in Minnesota. I welcome you to join us at any fair or festival. In addition, I offer catering services for small and large gatherings."
+    ]
   }
 }
